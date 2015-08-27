@@ -8,5 +8,5 @@ dependencies {
 	
 	provided 'in.koyad.piston.core:piston-ui:2.1',
 			 'javax:javaee-web-api:7.0'
-
+	
 }

@@ -1,6 +1,6 @@
 dependencies {
 	
 	provided 'in.koyad.piston.core:piston-common:2.1',
-			 'org.eclipse.persistence:javax.persistence:2.1.0'
-
+	         'in.koyad.piston.core:piston-model:2.1'
+				 
 }
