@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Context antiJARLocking="true" path="/usermgmt-service">
+	<ResourceLink name="jdbc/authentication" global="jdbc/authentication" type="javax.sql.DataSource" />
+</Context>
