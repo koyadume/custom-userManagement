@@ -13,12 +13,12 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package in.koyad.piston.app.userMgmt.service.api;
+package in.koyad.piston.app.userMgmt.sdk.api;
 
 import java.util.List;
 
-import org.koyad.piston.app.userMgmt.model.Group;
-import org.koyad.piston.app.userMgmt.model.User;
+import org.koyad.piston.core.model.Group;
+import org.koyad.piston.core.model.User;
 
 import in.koyad.piston.common.bo.Attribute;
 import in.koyad.piston.common.exceptions.FrameworkException;
@@ -26,11 +26,11 @@ import in.koyad.piston.common.exceptions.FrameworkException;
 public interface UserManagementService {
 	
 	public List<User> searchUsers(List<Attribute> atts) throws FrameworkException;
-	public User fetchUser(String userId) throws FrameworkException;
+	public User fetchUser(String internalId) throws FrameworkException;
 	public void saveUser(User user) throws FrameworkException;
 	
 	public List<Group> searchGroups(List<Attribute> atts) throws FrameworkException;
-	public Group fetchGroup(String name) throws FrameworkException;
+	public Group fetchGroup(String internalId) throws FrameworkException;
 	public void saveGroup(Group group) throws FrameworkException;
 
 }
