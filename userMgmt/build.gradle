@@ -1,6 +1,4 @@
-ext	{
-	resFolder = 'custom-userMgmt'
-}
+apply plugin: 'war'
 
 dependencies {
 
