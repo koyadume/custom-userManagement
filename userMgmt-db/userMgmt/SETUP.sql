@@ -1,6 +1,6 @@
-/* DROP DATABASE IF EXISTS `authentication`; */
-CREATE DATABASE IF NOT EXISTS `authentication`;
-USE `authentication`;
+/* DROP DATABASE IF EXISTS `userMgmt`; */
+CREATE DATABASE IF NOT EXISTS `userMgmt`;
+USE `userMgmt`;
 
 /* users */
 CREATE TABLE USER (
