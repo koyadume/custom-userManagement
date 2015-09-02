@@ -44,13 +44,21 @@
 		</c:if>
 		
 	    <div style="padding: 15px;">
-	        <form name="groupDetails" method="POST" action="saveGroup">
+	        <form name="userDetails" method="POST" action="saveUser">
 	        	<fieldset>
-					<legend>Group information</legend>
+					<legend>User information</legend>
 	                <ul style="list-style: none;">
-	                     <li>Name</li>
+	                     <li>UID</li>
 	                     <li>
-	                     		<text property="name" size="100" />
+	                     		<text property="uid" size="100" />
+	                     </li>
+	                     <li>Password</li>
+	                     <li>
+	                    		<password property="title" size="100" />
+	                     </li>
+	                     <li>First Name</li>
+	                     <li>
+	                          	<text property="firstName" size="100" />
 	                     </li>
 	                     <hidden property="id" />
 	                </ul>
@@ -58,10 +66,10 @@
 				
 				<div style="text-align: right; margin-top: 20px;">
 					<pButton class="btn pseudo-submit-button" faClass="fa fa-save fa-lg" faStyle="font-size: 1.2em; padding-right: 6px;"> 
-		  				<c:if test="${empty groupDetails.id}">
+		  				<c:if test="${empty userDetails.id}">
 							<c:out value="Create" />
 						</c:if>
-						<c:if test="${not empty groupDetails.id}">
+						<c:if test="${not empty userDetails.id}">
 							<c:out value="Update" />
 						</c:if>
 		  			</pButton>

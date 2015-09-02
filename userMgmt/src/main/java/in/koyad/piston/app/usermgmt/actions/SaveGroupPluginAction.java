@@ -26,33 +26,33 @@ import in.koyad.piston.common.utils.LogUtil;
 import in.koyad.piston.common.utils.ServiceManager;
 import in.koyad.piston.controller.plugin.PluginAction;
 import in.koyad.piston.controller.plugin.annotations.AnnoPluginAction;
+import in.koyad.piston.ui.utils.FormUtils;
 import in.koyad.piston.ui.utils.RequestContextUtil;
 
 @AnnoPluginAction(
-	name = GroupDetailsPluginAction.ACTION_NAME
+	name = SaveGroupPluginAction.ACTION_NAME
 )
-public class GroupDetailsPluginAction extends PluginAction {
+public class SaveGroupPluginAction extends PluginAction {
 	
 	private final UserManagementService userManagementService = ServiceManager.getService(UserManagementService.class);
 	
-	public static final String ACTION_NAME = "groupDetails";
+	public static final String ACTION_NAME = "saveGroup";
 
-	private static final LogUtil LOGGER = LogUtil.getLogger(GroupDetailsPluginAction.class);
+	private static final LogUtil LOGGER = LogUtil.getLogger(SaveGroupPluginAction.class);
 	
 	@Override
 	public String execute() throws FrameworkException {
 		LOGGER.enterMethod("execute");
 		
-		String groupId = RequestContextUtil.getParameter("id");
+		GroupDetailsPluginForm form = FormUtils.createFormWithReqParams(GroupDetailsPluginForm.class);
+		Group group = new Group();
+		BeanPropertyUtils.copyProperties(group, form);
 		
-		if(null != groupId) {
-			Group group = userManagementService.fetchGroup(groupId);
-
-			GroupDetailsPluginForm form = new GroupDetailsPluginForm();
-			BeanPropertyUtils.copyProperties(form, group);
-			
-			RequestContextUtil.setRequestAttribute(UserDetailsPluginForm.FORM_NAME, form);
-		}
+		userManagementService.saveGroup(group);
+		
+		form.setId(group.getId());
+		
+		RequestContextUtil.setRequestAttribute(GroupDetailsPluginForm.FORM_NAME, form);
 			
 		LOGGER.exitMethod("execute");
 		return "/pages/groupDetails.xml";

@@ -13,16 +13,19 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package in.koyad.piston.app.usermgmt.actions;
+package in.koyad.piston.app.usermgmt.forms;
 
 import in.koyad.piston.controller.plugin.annotations.AnnoPluginForm;
-import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 
-@AnnoPluginForm(name = "searchGroups")
-@Data
-public class SearchGroupsForm {
+@AnnoPluginForm(name = GroupDetailsPluginForm.FORM_NAME)
+@Getter @Setter
+public class GroupDetailsPluginForm {
 	
-	private String searchAttr;
-	private String searchAttrValue;
+	public static final String FORM_NAME = "groupDetails";
+	
+	private String id;
+	private String name;
 	
 }

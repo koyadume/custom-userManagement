@@ -1,70 +1,66 @@
+/*
+ * Copyright (c) 2012-2015 Shailendra Singh <shailendra_01@outlook.com>
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+var userMgmt = {
+	tiles: []
+};
+
 $(function() {
-	//events for sites.xml page
-	/* $('.pseudo-new-site').click(function() {
-		var form = createPluginForm(${this}, 'siteDetails'); 
-    	 form.appendTo('.pseudo-tile-content');
-    	 form.submit();
-    });
-    
-    $('.pseudo-edit-site').click(function() {
-    	var form = createPluginForm(${this}, 'siteDetails'); 
-    	 createHidden('id', $(this).attr('id')).appendTo(form);
-    	 form.appendTo('.pseudo-tile-content');
-    	 form.submit();
-    }); */
-    
-    //events for siteNodes.xml page
-	$('#site').change(function() { 
-        var siteId = $('#site').val();
-        if(siteId != "") {
-        	var form = createPluginForm($(this), 'getSitePageChildren');
-        	createHidden('siteId', siteId).appendTo(form);
-        	form.appendTo('.pseudo-tile-content');
-        	form.submit();
-        } else {
-			$('#resChildren').html('');				        
+	$('.pseudo-search-type').click(function() {
+		var value = $('.pseudo-search-type:checked').val();
+		var searchDropDown = $('.pseudo-search-dropdown');
+		if(value == "USER") {
+			searchDropDown.find('option').remove();
+			searchDropDown.append('<option value="">--Select--</option>')
+				.append('<option value="uid">UID</option>')
+				.append('<option value="firstName">First Name</option>')
+				.append('<option value="email">Email</option>');
+        } else if(value == "GROUP") {
+        	searchDropDown.find('option').remove();
+        	searchDropDown.append('<option value="">--Select--</option>')
+	  			.append('<option value="name">Name</option>');
         }
+	});
+	
+	$('.pseudo-search').click(function() {
+    	$('.pseudo-waitSearchResults').show();
+    	$('.pseudo-searchResults').html('');
+    	$.ajax({
+       		async : false,
+            url: '/piston/ajaxPlugin',
+            type: 'POST',
+    		data: form.serializeArray(),
+            success: function(data) {
+            	$('.pseudo-waitSearchResults').hide();
+				$('.pseudo-searchResults').html(data);
+            }
+    	});
     });
-    
-    $('.pseudo-pgLink').click(function() {
-    	var siteId = $('#site').val();
-   		var form = createPluginForm($(this), 'getSitePageChildren');
-   		createHidden('siteId', siteId).appendTo(form);
-   		createHidden('parentId', $(this).attr('id')).appendTo(form);
-   		form.appendTo('.pseudo-tile-content');
-   		form.submit();
+	
+	$('.pseudo-delete-principals').click(function() {
+    	$('.pseudo-waitSearchResults').show();
+    	$('.pseudo-searchResults').html('');
+    	$.ajax({
+       		async : false,
+            url: '/piston/ajaxPlugin',
+            type: 'POST',
+    		data: form.serializeArray(),
+            success: function(data) {
+            	$('.pseudo-waitSearchResults').hide();
+				$('.pseudo-searchResults').html(data);
+            }
+    	});
     });
-    
-     /* $('.pseudo-new-page').click(function() {
-    	 var form = createPluginForm(${this}, 'pageDetails'); 
-     	 form.appendTo('.pseudo-tile-content');
-     	 form.submit();
-     });
-     
-     $('.pseudo-edit-page').click(function() {
-     	 var form = createPluginForm(${this}, 'pageDetails'); 
-     	 createHidden('id', $(this).attr('id')).appendTo(form);
-     	 form.appendTo('.pseudo-tile-content');
-     	 form.submit();
-     }); */
-     
-     function move(ele, action) {
-		// create form
-     	var form = createPluginForm(ele, 'movePage');
-     	setPluginNextAction(form, 'getSitePageChildren');
-     	// set hidden parameters
-     	createHidden('pageId', ele.attr('id'));
-     	createHidden('action', action);
-     	// submit form
-   		form.appendTo('.pseudo-tile-content');
-   		form.submit();
-     }
-     
-     $('.pseudo-moveDown').click(function() {
-   		move($(this), 'down');
-     });
-    
-     $('.pseudo-moveUp').click(function() {
-		move($(this), 'up');
-     });
 });

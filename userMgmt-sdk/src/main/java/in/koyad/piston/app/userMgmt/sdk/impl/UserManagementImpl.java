@@ -87,6 +87,20 @@ public class UserManagementImpl extends AbstractREST implements UserManagementSe
 	}
 	
 	@Override
+	public void deleteUsers(List<String> userIds) throws FrameworkException {
+		LOGGER.enterMethod("deleteUsers");
+		
+		try {
+			String query = MessageFormat.format("userIds={0}", Joiner.on(',').join(userIds));
+			delete(MessageFormat.format("/userMgmt-service/{0}/users", ServiceConstants.VERSION), query);
+		} catch(URISyntaxException ex) {
+			LOGGER.logException(ex);
+		}
+		
+		LOGGER.exitMethod("deleteUsers");
+	}
+	
+	@Override
 	public List<Group> searchGroups(List<Attribute> atts) throws FrameworkException {
 		LOGGER.enterMethod("searchGroups");
 		
@@ -130,6 +144,20 @@ public class UserManagementImpl extends AbstractREST implements UserManagementSe
 		}
 
 		LOGGER.exitMethod("saveGroup");
+	}
+
+	@Override
+	public void deleteGroups(List<String> groupIds) throws FrameworkException {
+		LOGGER.enterMethod("deleteGroups");
+		
+		try {
+			String query = MessageFormat.format("groupIds={0}", Joiner.on(',').join(groupIds));
+			delete(MessageFormat.format("/userMgmt-service/{0}/groups", ServiceConstants.VERSION), query);
+		} catch(URISyntaxException ex) {
+			LOGGER.logException(ex);
+		}
+		
+		LOGGER.exitMethod("deleteGroups");
 	}
 	
 }

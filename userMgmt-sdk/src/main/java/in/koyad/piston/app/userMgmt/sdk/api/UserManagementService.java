@@ -28,9 +28,11 @@ public interface UserManagementService {
 	public List<User> searchUsers(List<Attribute> atts) throws FrameworkException;
 	public User fetchUser(String internalId) throws FrameworkException;
 	public void saveUser(User user) throws FrameworkException;
+	public void deleteUsers(List<String> userIds) throws FrameworkException;
 	
 	public List<Group> searchGroups(List<Attribute> atts) throws FrameworkException;
 	public Group fetchGroup(String internalId) throws FrameworkException;
 	public void saveGroup(Group group) throws FrameworkException;
+	public void deleteGroups(List<String> groupIds) throws FrameworkException;
 
 }

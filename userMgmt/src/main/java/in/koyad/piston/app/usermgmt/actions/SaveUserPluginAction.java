@@ -15,10 +15,9 @@
  */
 package in.koyad.piston.app.usermgmt.actions;
 
-import org.koyad.piston.core.model.Group;
+import org.koyad.piston.core.model.User;
 
 import in.koyad.piston.app.userMgmt.sdk.api.UserManagementService;
-import in.koyad.piston.app.usermgmt.forms.GroupDetailsPluginForm;
 import in.koyad.piston.app.usermgmt.forms.UserDetailsPluginForm;
 import in.koyad.piston.common.exceptions.FrameworkException;
 import in.koyad.piston.common.utils.BeanPropertyUtils;
@@ -26,36 +25,36 @@ import in.koyad.piston.common.utils.LogUtil;
 import in.koyad.piston.common.utils.ServiceManager;
 import in.koyad.piston.controller.plugin.PluginAction;
 import in.koyad.piston.controller.plugin.annotations.AnnoPluginAction;
+import in.koyad.piston.ui.utils.FormUtils;
 import in.koyad.piston.ui.utils.RequestContextUtil;
 
 @AnnoPluginAction(
-	name = GroupDetailsPluginAction.ACTION_NAME
+	name = SaveUserPluginAction.ACTION_NAME
 )
-public class GroupDetailsPluginAction extends PluginAction {
+public class SaveUserPluginAction extends PluginAction {
 	
 	private final UserManagementService userManagementService = ServiceManager.getService(UserManagementService.class);
 	
-	public static final String ACTION_NAME = "groupDetails";
+	public static final String ACTION_NAME = "saveUser";
 
-	private static final LogUtil LOGGER = LogUtil.getLogger(GroupDetailsPluginAction.class);
+	private static final LogUtil LOGGER = LogUtil.getLogger(SaveUserPluginAction.class);
 	
 	@Override
 	public String execute() throws FrameworkException {
 		LOGGER.enterMethod("execute");
 		
-		String groupId = RequestContextUtil.getParameter("id");
+		UserDetailsPluginForm form = FormUtils.createFormWithReqParams(UserDetailsPluginForm.class);
+		User user = new User();
+		BeanPropertyUtils.copyProperties(user, form);
 		
-		if(null != groupId) {
-			Group group = userManagementService.fetchGroup(groupId);
-
-			GroupDetailsPluginForm form = new GroupDetailsPluginForm();
-			BeanPropertyUtils.copyProperties(form, group);
-			
-			RequestContextUtil.setRequestAttribute(UserDetailsPluginForm.FORM_NAME, form);
-		}
+		userManagementService.saveUser(user);
+		
+		form.setId(user.getId());
+		
+		RequestContextUtil.setRequestAttribute(UserDetailsPluginForm.FORM_NAME, form);
 			
 		LOGGER.exitMethod("execute");
-		return "/pages/groupDetails.xml";
+		return "/pages/userDetails.xml";
 	}
 
 }
