@@ -4,7 +4,7 @@ dependencies {
 
 	compile project(':userMgmt-sdk')
 	
-	provided 'in.koyad.piston.core:piston-ui:2.1',
+	provided 'in.koyad.piston.core:piston-ui:2.x',
 			 'javax:javaee-web-api:7.0'
 	
 }

@@ -9,8 +9,8 @@ dependencies {
             'org.hibernate:hibernate-entitymanager:4.3.8.Final'
 
     provided 'javax:javaee-web-api:7.0',
-    		 'in.koyad.piston.core:piston-dao:2.1',
-    		 'in.koyad.piston.core:piston-sdk:2.1'
+    		 'in.koyad.piston.core:piston-dao:2.x',
+    		 'in.koyad.piston.core:piston-sdk:2.x'
         
     testRuntime 'org.mariadb.jdbc:mariadb-java-client:1.2.0'
 }

@@ -31,11 +31,12 @@ import in.koyad.piston.common.bo.Attribute;
 import in.koyad.piston.common.bo.Result;
 import in.koyad.piston.common.constants.RestContants;
 import in.koyad.piston.common.exceptions.FrameworkException;
+import in.koyad.piston.common.utils.AbstractREST;
 import in.koyad.piston.common.utils.JsonProcessor;
 import in.koyad.piston.common.utils.LogUtil;
 import in.koyad.piston.common.utils.RestServiceUtil;
 
-public class UserManagementImpl implements UserManagementService {
+public class UserManagementImpl extends AbstractREST implements UserManagementService {
 	
 	private static final LogUtil LOGGER = LogUtil.getLogger(UserManagementImpl.class);
 	
@@ -45,19 +46,10 @@ public class UserManagementImpl implements UserManagementService {
 		
 		List<User> users = null;
 		try {
-			String path = "/usermgmt-service/v1/users";
-			
+			String resource = MessageFormat.format("/userMgmt-service/{0}/users", ServiceConstants.VERSION);
 			String query = Joiner.on('&').join(atts.stream().map(attr -> attr.getName().concat("=").concat(attr.getValue())).collect(Collectors.toList()));
-			LOGGER.debug("Query : ".concat(query));
 			
-			URI uri = new URI("http", "localhost", path, MessageFormat.format("query=({0})", query), null);
-			LOGGER.debug("URI : ".concat(uri.toString()));
-			
-			Result result = RestServiceUtil.get(uri);
-			LOGGER.debug("Response code : " + result.getCode());
-	
-			String json = result.getBody();
-			users = JsonProcessor.getAsObject(json, List.class);
+			users = get(resource, query, List.class);
 		} catch(URISyntaxException ex) {
 			LOGGER.logException(ex);
 		}
@@ -72,14 +64,7 @@ public class UserManagementImpl implements UserManagementService {
 
 		User user = null;
 		try {
-			URI uri = new URI("http", "localhost", MessageFormat.format("/users/{0}", internalId), null);
-			LOGGER.debug("URI : ".concat(uri.toString()));
-			
-			Result result = RestServiceUtil.get(uri);
-			LOGGER.debug("Response code : " + result.getCode());
-	
-			String json = result.getBody();
-			user = JsonProcessor.getAsObject(json, User.class);
+			user = get(MessageFormat.format("/userMgmt-service/{0}/users/{1}", ServiceConstants.VERSION, internalId), User.class);
 		} catch(URISyntaxException ex) {
 			LOGGER.logException(ex);
 		}
@@ -93,12 +78,7 @@ public class UserManagementImpl implements UserManagementService {
 		LOGGER.enterMethod("saveUser");
 
 		try {
-			URI uri = new URI("http", "localhost", "/users", null);
-			LOGGER.debug("URI : ".concat(uri.toString()));
-			
-			Result result = RestServiceUtil.put(uri, user, RestContants.CONTENT_TYPE_JSON);
-			LOGGER.debug("Response code : " + result.getCode());
-
+			put(MessageFormat.format("/userMgmt-service/{0}/users", ServiceConstants.VERSION), user);
 		} catch(URISyntaxException ex) {
 			LOGGER.logException(ex);
 		}
@@ -112,19 +92,10 @@ public class UserManagementImpl implements UserManagementService {
 		
 		List<Group> groups = null;
 		try {
-			String path = "/usermgmt-service/v1/groups";
-			
+			String resource = MessageFormat.format("/userMgmt-service/{0}/groups", ServiceConstants.VERSION);
 			String query = Joiner.on('&').join(atts.stream().map(attr -> attr.getName().concat("=").concat(attr.getValue())).collect(Collectors.toList()));
-			LOGGER.debug("Query : ".concat(query));
 			
-			URI uri = new URI("http", "localhost", path, MessageFormat.format("query=({0})", query), null);
-			LOGGER.debug("URI : ".concat(uri.toString()));
-			
-			Result result = RestServiceUtil.get(uri);
-			LOGGER.debug("Response code : " + result.getCode());
-	
-			String json = result.getBody();
-			groups = JsonProcessor.getAsObject(json, List.class);
+			groups = get(resource, query, List.class);
 		} catch(URISyntaxException ex) {
 			LOGGER.logException(ex);
 		}
@@ -139,14 +110,7 @@ public class UserManagementImpl implements UserManagementService {
 
 		Group group = null;
 		try {
-			URI uri = new URI("http", "localhost", MessageFormat.format("/groups/{0}", internalId), null);
-			LOGGER.debug("URI : ".concat(uri.toString()));
-			
-			Result result = RestServiceUtil.get(uri);
-			LOGGER.debug("Response code : " + result.getCode());
-	
-			String json = result.getBody();
-			group = JsonProcessor.getAsObject(json, Group.class);
+			group = get(MessageFormat.format("/userMgmt-service/{0}/groups/{1}", ServiceConstants.VERSION, internalId), Group.class);
 		} catch(URISyntaxException ex) {
 			LOGGER.logException(ex);
 		}
@@ -160,12 +124,7 @@ public class UserManagementImpl implements UserManagementService {
 		LOGGER.enterMethod("saveGroup");
 		
 		try {
-			URI uri = new URI("http", "localhost", "/groups", null);
-			LOGGER.debug("URI : ".concat(uri.toString()));
-			
-			Result result = RestServiceUtil.put(uri, group, RestContants.CONTENT_TYPE_JSON);
-			LOGGER.debug("Response code : " + result.getCode());
-
+			put(MessageFormat.format("/userMgmt-service/{0}/groups", ServiceConstants.VERSION), group);
 		} catch(URISyntaxException ex) {
 			LOGGER.logException(ex);
 		}
