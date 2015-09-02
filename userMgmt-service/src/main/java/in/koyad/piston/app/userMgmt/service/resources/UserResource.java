@@ -1,9 +1,11 @@
 package in.koyad.piston.app.userMgmt.service.resources;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import javax.ws.rs.Consumes;
+import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.PUT;
@@ -67,5 +69,14 @@ public class UserResource {
 		userMgmtService.saveUser(user);
 		
 		LOGGER.exitMethod("saveUser");
+	}
+	
+	@DELETE
+	public void deleteUsers(@QueryParam("userIds") String userIds) throws FrameworkException {
+		LOGGER.enterMethod("deleteUsers");
+		
+		userMgmtService.deleteUsers(Arrays.asList(StringUtil.split(userIds, ",")));
+		
+		LOGGER.exitMethod("deleteUsers");
 	}
 }

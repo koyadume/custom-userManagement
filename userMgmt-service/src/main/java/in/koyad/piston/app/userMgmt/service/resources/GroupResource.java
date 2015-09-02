@@ -1,9 +1,11 @@
 package in.koyad.piston.app.userMgmt.service.resources;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import javax.ws.rs.Consumes;
+import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.PUT;
@@ -67,5 +69,14 @@ public class GroupResource {
 		userMgmtService.saveGroup(group);
 		
 		LOGGER.exitMethod("saveGroup");
+	}
+	
+	@DELETE
+	public void deleteGroups(@QueryParam("groupIds") String groupIds) throws FrameworkException {
+		LOGGER.enterMethod("deleteGroups");
+		
+		userMgmtService.deleteGroups(Arrays.asList(StringUtil.split(groupIds, ",")));
+		
+		LOGGER.exitMethod("deleteGroups");
 	}
 }

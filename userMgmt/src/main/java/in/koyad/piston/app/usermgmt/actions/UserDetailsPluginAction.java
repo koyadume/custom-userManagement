@@ -15,10 +15,9 @@
  */
 package in.koyad.piston.app.usermgmt.actions;
 
-import org.koyad.piston.core.model.Group;
+import org.koyad.piston.core.model.User;
 
 import in.koyad.piston.app.userMgmt.sdk.api.UserManagementService;
-import in.koyad.piston.app.usermgmt.forms.GroupDetailsPluginForm;
 import in.koyad.piston.app.usermgmt.forms.UserDetailsPluginForm;
 import in.koyad.piston.common.exceptions.FrameworkException;
 import in.koyad.piston.common.utils.BeanPropertyUtils;
@@ -29,33 +28,33 @@ import in.koyad.piston.controller.plugin.annotations.AnnoPluginAction;
 import in.koyad.piston.ui.utils.RequestContextUtil;
 
 @AnnoPluginAction(
-	name = GroupDetailsPluginAction.ACTION_NAME
+	name = UserDetailsPluginAction.ACTION_NAME
 )
-public class GroupDetailsPluginAction extends PluginAction {
+public class UserDetailsPluginAction extends PluginAction {
 	
 	private final UserManagementService userManagementService = ServiceManager.getService(UserManagementService.class);
 	
-	public static final String ACTION_NAME = "groupDetails";
+	public static final String ACTION_NAME = "userDetails";
 
-	private static final LogUtil LOGGER = LogUtil.getLogger(GroupDetailsPluginAction.class);
+	private static final LogUtil LOGGER = LogUtil.getLogger(UserDetailsPluginAction.class);
 	
 	@Override
 	public String execute() throws FrameworkException {
 		LOGGER.enterMethod("execute");
 		
-		String groupId = RequestContextUtil.getParameter("id");
+		String userId = RequestContextUtil.getParameter("id");
 		
-		if(null != groupId) {
-			Group group = userManagementService.fetchGroup(groupId);
+		if(null != userId) {
+			User user = userManagementService.fetchUser(userId);
 
-			GroupDetailsPluginForm form = new GroupDetailsPluginForm();
-			BeanPropertyUtils.copyProperties(form, group);
+			UserDetailsPluginForm form = new UserDetailsPluginForm();
+			BeanPropertyUtils.copyProperties(form, user);
 			
 			RequestContextUtil.setRequestAttribute(UserDetailsPluginForm.FORM_NAME, form);
 		}
 			
 		LOGGER.exitMethod("execute");
-		return "/pages/groupDetails.xml";
+		return "/pages/userDetails.xml";
 	}
 
 }

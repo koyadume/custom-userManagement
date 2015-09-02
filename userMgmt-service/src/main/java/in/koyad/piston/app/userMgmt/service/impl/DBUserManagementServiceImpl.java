@@ -15,6 +15,7 @@
  */
 package in.koyad.piston.app.userMgmt.service.impl;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -69,6 +70,17 @@ public class DBUserManagementServiceImpl implements UserManagementService {
 		LOGGER.exitMethod("fetchUser");
 		return user;
 	}
+	
+	@Override
+	public void deleteUsers(List<String> userIds) throws FrameworkException {
+		LOGGER.enterMethod("deleteUsers");
+		
+		Map<String, Object> conditions = new HashMap<>();
+		conditions.put("id", userIds);
+		globalDAO.deleteEntities(User.class, conditions);
+		
+		LOGGER.exitMethod("deleteUsers");
+	}
 
 	@Override
 	public List<Group> searchGroups(List<Attribute> atts) throws FrameworkException {
@@ -102,6 +114,17 @@ public class DBUserManagementServiceImpl implements UserManagementService {
 		}
 
 		LOGGER.exitMethod("saveGroup");
+	}
+
+	@Override
+	public void deleteGroups(List<String> groupIds) throws FrameworkException {
+		LOGGER.enterMethod("deleteGroups");
+		
+		Map<String, Object> conditions = new HashMap<>();
+		conditions.put("id", groupIds);
+		globalDAO.deleteEntities(Group.class, conditions);
+		
+		LOGGER.exitMethod("deleteGroups");
 	}
 	
 }

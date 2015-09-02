@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<plugin:page xmlns="http://piston.koyad.in/html5" xmlns:plugin="http://piston.koyad.in/plugin"
+	xmlns:c="http://piston.koyad.in/core" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://piston.koyad.in/html5 http://piston.koyad.in/html5 
+						http://piston.koyad.in/plugin http://piston.koyad.in/plugin 
+						http://piston.koyad.in/core http://piston.koyad.in/core">
+		<div>
+			<fieldset>
+					<legend>Search</legend>
+				    <div style="padding: 5px;">
+				    	<form method="POST" action="searchResults">
+				    		<p>
+				        		<span style="padding-right: 8px;">
+				        			<b>Select type</b>
+				        		</span>
+					        	<label> 
+					        		<input name="searchType" type="radio" class="pseudo-search-type" value="USER" />
+					        		<t>Users</t>
+					        	</label>
+					        	<label>
+					        		<input name="searchType" type="radio" class="pseudo-search-type" value="GROUP" />
+					        		<t>Groups</t>
+					        	</label>
+				        	</p>
+				        	<p>
+				                <select property="searchAttr" class="pseudo-search-dropdown">
+				                	<option value=""><t>-- Select --</t></option>
+				                </select>
+				                <text property="searchAttrValue" value="" style="margin-left: 10px; margin-bottom: 5px !important;" />
+			                </p>
+			                <p>
+			                	<pButton class="btn pseudo-search" faClass="fa fa-search fa-lg" faStyle="font-size: 1.2em; padding-right: 6px;"> 
+					  					<c:out value="Search" />
+					  			</pButton>
+			                </p>
+		                </form>
+				    </div>
+			</fieldset>   
+				  
+		    <div>
+		    	<div class="pseudo-waitSearchResults" style="display:none;">
+		    		<img src="img/ajax-loader.gif" style="margin: 15px auto; display: block;" />
+		    	</div>
+		    	<div class="pseudo-searchResults"></div>
+		    </div>
+		</div>
+</plugin:page>
