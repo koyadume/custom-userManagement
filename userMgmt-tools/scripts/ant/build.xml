@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="App specific configuration" basedir="." default="appSpecificConfig">
+	
+	<property environment="env" />
+	
+	<path id="extLibs">
+		<fileset dir="${env.ANT_HOME}/ext">
+	        <include name="**/*.jar"/>
+	    </fileset>
+	</path>
+
+	<taskdef resource="piston-antlib.xml">
+		<classpath refid="extLibs"/>
+	</taskdef>
+	
+	<property name="tomcat-installDir" value="${env.PISTON_WORKSPACE}/servers/tomcat-${tomcat-majorVersion}.0.${tomcat-minorVersion}" />
+	
+	<target name="configureTomcat">
+		<echo message="Configuring tomcat .." />
+		<property name="server-configFile" value="${tomcat-installDir}/conf/server.xml" />
+		<alterXML src="${server-configFile}">
+			<!-- Remove UserDatabase resource -->
+			<del xpath="//Resource[@name='UserDatabase']" />
+			
+			<!-- Remove UserDatabase realm -->
+			<del xpath="//Realm[@className='org.apache.catalina.realm.UserDatabaseRealm']" />
+
+			<!-- Add DataSourceRealm realm -->
+			<add parent="//Realm[@className='org.apache.catalina.realm.LockOutRealm']" name="Realm">
+				<attr name="className" value="org.apache.catalina.realm.DataSourceRealm" identifier="true" />
+				<attr name="dataSourceName" value="jdbc/${shortName}" />
+				<attr name="userTable" value="user" />
+				<attr name="userNameCol" value="uid" />
+				<attr name="userCredCol" value="password" />
+				<attr name="userRoleTable" value="user_role" />
+				<attr name="roleNameCol" value="role_id" />
+			</add>
+		</alterXML>
+		<echo message="Done." />
+	</target>
+		
+	<target name="appSpecificConfig">
+		<!-- Configure tomcat -->
+		<antcall target="configureTomcat"></antcall>
+	</target>
+</project>
