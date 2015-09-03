@@ -1,5 +1,7 @@
 dependencies {
 	
+	compile project(':userMgmt-sdk')
+	
 	provided 'in.koyad.piston.core:piston-common:2.x', 
 			 'in.koyad.piston.core:piston-model:2.x'
 			 

@@ -33,7 +33,7 @@
 				<attr name="userNameCol" value="uid" />
 				<attr name="userCredCol" value="password" />
 				<attr name="userRoleTable" value="user_role" />
-				<attr name="roleNameCol" value="role_id" />
+				<attr name="roleNameCol" value="role_name" />
 			</add>
 		</alterXML>
 		<echo message="Done." />

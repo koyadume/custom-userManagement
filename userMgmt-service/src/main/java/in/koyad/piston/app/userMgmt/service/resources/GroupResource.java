@@ -37,7 +37,7 @@ public class GroupResource {
 	public List<Group> searchGroups(@QueryParam("query") String query) throws FrameworkException {
 		LOGGER.enterMethod("searchGroups");
 		
-		String[] tokens = StringUtil.split(query.substring(0, query.length() - 1), "&");
+		String[] tokens = StringUtil.split(query.substring(1, query.length() - 1), "&");
 		
 		List<Attribute> atts = new ArrayList<>();
 		for(String token : tokens) {
@@ -62,13 +62,23 @@ public class GroupResource {
 	}
 
 	@POST
-	@PUT
-	public void saveGroup(Group group) throws FrameworkException {
-		LOGGER.enterMethod("saveGroup");
+	public void createGroup(Group group) throws FrameworkException {
+		LOGGER.enterMethod("createGroup");
 		
 		userMgmtService.saveGroup(group);
 		
-		LOGGER.exitMethod("saveGroup");
+		LOGGER.exitMethod("createGroup");
+	}
+	
+	@PUT
+	@Path("{id}")
+	public void updateGroup(@PathParam("id") String id, Group group) throws FrameworkException {
+		LOGGER.enterMethod("updateGroup");
+		
+		group.setId(id);
+		userMgmtService.saveGroup(group);
+		
+		LOGGER.exitMethod("updateGroup");
 	}
 	
 	@DELETE

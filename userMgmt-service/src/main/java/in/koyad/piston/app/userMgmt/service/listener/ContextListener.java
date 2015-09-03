@@ -42,7 +42,7 @@ public class ContextListener implements ServletContextListener {
 			
 		//initialize JPA EntityManagerFactory
 		JPAEMFactory.initialize(Joiner.on(',').join(new String[]{
-														DBConstants.PERSISTENT_UNIT_AUTHENTICATION
+														DBConstants.PERSISTENT_UNIT_USERMGMT
 													}));
 		
 		LOGGER.exitMethod("contextInitialized");

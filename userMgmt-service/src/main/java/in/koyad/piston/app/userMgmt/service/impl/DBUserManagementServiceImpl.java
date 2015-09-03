@@ -35,7 +35,7 @@ public class DBUserManagementServiceImpl implements UserManagementService {
 	
 	private static final LogUtil LOGGER = LogUtil.getLogger(DBUserManagementServiceImpl.class);
 	
-	private final GlobalDAO globalDAO = new GlobalDAO(DBConstants.PERSISTENT_UNIT_AUTHENTICATION);
+	private final GlobalDAO globalDAO = new GlobalDAO(DBConstants.PERSISTENT_UNIT_USERMGMT);
 	
 	@Override
 	public List<User> searchUsers(List<Attribute> atts) throws FrameworkException {

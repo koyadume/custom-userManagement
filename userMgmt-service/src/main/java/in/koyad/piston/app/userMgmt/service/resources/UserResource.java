@@ -37,7 +37,7 @@ public class UserResource {
 	public List<User> searchUsers(@QueryParam("query") String query) throws FrameworkException {
 		LOGGER.enterMethod("searchUsers");
 		
-		String[] tokens = StringUtil.split(query.substring(0, query.length() - 1), "&");
+		String[] tokens = StringUtil.split(query.substring(1, query.length() - 1), "&");
 		
 		List<Attribute> atts = new ArrayList<>();
 		for(String token : tokens) {
@@ -62,13 +62,23 @@ public class UserResource {
 	}
 	
 	@POST
-	@PUT
-	public void saveUser(User user) throws FrameworkException {
-		LOGGER.enterMethod("saveUser");
+	public void createUser(User user) throws FrameworkException {
+		LOGGER.enterMethod("createUser");
 		
 		userMgmtService.saveUser(user);
 		
-		LOGGER.exitMethod("saveUser");
+		LOGGER.exitMethod("createUser");
+	}
+	
+	@PUT
+	@Path("{id}")
+	public void updateUser(@PathParam("id") String id, User user) throws FrameworkException {
+		LOGGER.enterMethod("updateUser");
+		
+		user.setId(id);
+		userMgmtService.saveUser(user);
+		
+		LOGGER.exitMethod("updateUser");
 	}
 	
 	@DELETE
