@@ -32,9 +32,9 @@ import in.koyad.piston.core.dao.utils.JPAEMFactory;
  */
 
 @WebListener
-public class ContextListener implements ServletContextListener {
+public class UserMgmtServiceContextListener implements ServletContextListener {
 
-	private static final LogUtil LOGGER = LogUtil.getLogger(ContextListener.class);
+	private static final LogUtil LOGGER = LogUtil.getLogger(UserMgmtServiceContextListener.class);
 
 	@Override
 	public void contextInitialized(ServletContextEvent servletContextEvent) {
