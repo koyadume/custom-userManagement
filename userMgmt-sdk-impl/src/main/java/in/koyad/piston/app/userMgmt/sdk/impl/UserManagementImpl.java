@@ -15,7 +15,6 @@
  */
 package in.koyad.piston.app.userMgmt.sdk.impl;
 
-import java.net.URI;
 import java.net.URISyntaxException;
 import java.text.MessageFormat;
 import java.util.List;
@@ -28,13 +27,10 @@ import com.google.common.base.Joiner;
 
 import in.koyad.piston.app.userMgmt.sdk.api.UserManagementService;
 import in.koyad.piston.common.bo.Attribute;
-import in.koyad.piston.common.bo.Result;
-import in.koyad.piston.common.constants.RestContants;
 import in.koyad.piston.common.exceptions.FrameworkException;
 import in.koyad.piston.common.utils.AbstractREST;
-import in.koyad.piston.common.utils.JsonProcessor;
 import in.koyad.piston.common.utils.LogUtil;
-import in.koyad.piston.common.utils.RestServiceUtil;
+import in.koyad.piston.common.utils.StringUtil;
 
 public class UserManagementImpl extends AbstractREST implements UserManagementService {
 	
@@ -78,7 +74,11 @@ public class UserManagementImpl extends AbstractREST implements UserManagementSe
 		LOGGER.enterMethod("saveUser");
 
 		try {
-			put(MessageFormat.format("/userMgmt-service/{0}/users", ServiceConstants.VERSION), user);
+			if(StringUtil.isEmpty(user.getId())) {
+				post(MessageFormat.format("/userMgmt-service/{0}/users", ServiceConstants.VERSION), user);
+			} else {
+				put(MessageFormat.format("/userMgmt-service/{0}/users/{1}", ServiceConstants.VERSION, user.getId()), user);
+			}
 		} catch(URISyntaxException ex) {
 			LOGGER.logException(ex);
 		}
@@ -138,7 +138,11 @@ public class UserManagementImpl extends AbstractREST implements UserManagementSe
 		LOGGER.enterMethod("saveGroup");
 		
 		try {
-			put(MessageFormat.format("/userMgmt-service/{0}/groups", ServiceConstants.VERSION), group);
+			if(StringUtil.isEmpty(group.getId())) {
+				post(MessageFormat.format("/userMgmt-service/{0}/groups", ServiceConstants.VERSION), group);
+			} else {
+				put(MessageFormat.format("/userMgmt-service/{0}/groups/{1}", ServiceConstants.VERSION, group.getId()), group);
+			}
 		} catch(URISyntaxException ex) {
 			LOGGER.logException(ex);
 		}

@@ -5,9 +5,12 @@
 			http://xmlns.jcp.org/xml/ns/persistence/persistence_2_1.xsd"
 			version="2.1">
 
-	<persistence-unit name="authentication" transaction-type="RESOURCE_LOCAL">
+	<persistence-unit name="userMgmt" transaction-type="RESOURCE_LOCAL">
 		<provider>org.hibernate.ejb.HibernatePersistence</provider>
-		<non-jta-data-source>java:comp/env/jdbc/authentication</non-jta-data-source>
+		<non-jta-data-source>java:comp/env/jdbc/userMgmt</non-jta-data-source>
+		<class>org.koyad.piston.core.model.User</class>
+		<class>org.koyad.piston.core.model.Group</class>
+		<class>org.koyad.piston.core.model.Role</class>
 		<properties>
 			<property name="hibernate.dialect" value="org.hibernate.dialect.MySQL5InnoDBDialect" />
 			<property name="hibernate.cache.use_second_level_cache" value="false" />

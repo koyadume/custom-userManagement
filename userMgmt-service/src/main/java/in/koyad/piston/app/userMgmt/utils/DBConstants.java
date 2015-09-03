@@ -8,6 +8,6 @@ package in.koyad.piston.app.userMgmt.utils;
 */
 public interface DBConstants {
 
-	public static final String PERSISTENT_UNIT_AUTHENTICATION = "authentication";
+	public static final String PERSISTENT_UNIT_USERMGMT = "userMgmt";
 
 }

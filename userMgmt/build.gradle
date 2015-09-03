@@ -2,9 +2,9 @@ apply plugin: 'war'
 
 dependencies {
 
-	compile project(':userMgmt-sdk')
+	compile project(':userMgmt-sdk-impl')
 	
-	provided 'in.koyad.piston.core:piston-ui:2.x',
-			 'javax:javaee-web-api:7.0'
-	
+	provided 'in.koyad.piston.core:piston-ui:2.x'
+
 }
+

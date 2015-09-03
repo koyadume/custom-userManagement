@@ -1,6 +1,6 @@
 # Context root
 ```
-/usermgmt-service/v1
+/userMgmt-service/v1.0
 ```
 
 ## Users
@@ -22,7 +22,12 @@ POST /users
 
 ### Update user
 ```
-PUT /users
+PUT /users/{id}
+```
+
+### Delete users
+```
+DELETE /users?userIds=<Comma seperated list of user ids>
 ```
 
 ## Groups
@@ -44,8 +49,11 @@ POST /groups
 
 ### Update group
 ```
-PUT /groups
+PUT /groups/{id}
 ```
 
-
+### Delete groups
+```
+DELETE /groups?groupIds=<Comma seperated list of group ids>
+```
 
