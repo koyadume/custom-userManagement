@@ -46,8 +46,9 @@ public class UserManagementImpl extends AbstractREST implements UserManagementSe
 			String query = Joiner.on('&').join(atts.stream().map(attr -> attr.getName().concat("=").concat(attr.getValue())).collect(Collectors.toList()));
 			
 			users = get(resource, query, List.class);
-		} catch(URISyntaxException ex) {
+		} catch(Exception ex) {
 			LOGGER.logException(ex);
+			throw new FrameworkException(ex.getMessage());
 		}
 		
 		LOGGER.exitMethod("searchUsers");
@@ -61,8 +62,9 @@ public class UserManagementImpl extends AbstractREST implements UserManagementSe
 		User user = null;
 		try {
 			user = get(MessageFormat.format("/userMgmt-service/{0}/users/{1}", ServiceConstants.VERSION, internalId), User.class);
-		} catch(URISyntaxException ex) {
+		} catch(Exception ex) {
 			LOGGER.logException(ex);
+			throw new FrameworkException(ex.getMessage());
 		}
 		
 		LOGGER.exitMethod("fetchUser");
@@ -79,8 +81,9 @@ public class UserManagementImpl extends AbstractREST implements UserManagementSe
 			} else {
 				put(MessageFormat.format("/userMgmt-service/{0}/users/{1}", ServiceConstants.VERSION, user.getId()), user);
 			}
-		} catch(URISyntaxException ex) {
+		} catch(Exception ex) {
 			LOGGER.logException(ex);
+			throw new FrameworkException(ex.getMessage());
 		}
 		
 		LOGGER.exitMethod("saveUser");
@@ -93,8 +96,9 @@ public class UserManagementImpl extends AbstractREST implements UserManagementSe
 		try {
 			String query = MessageFormat.format("userIds={0}", Joiner.on(',').join(userIds));
 			delete(MessageFormat.format("/userMgmt-service/{0}/users", ServiceConstants.VERSION), query);
-		} catch(URISyntaxException ex) {
+		} catch(Exception ex) {
 			LOGGER.logException(ex);
+			throw new FrameworkException(ex.getMessage());
 		}
 		
 		LOGGER.exitMethod("deleteUsers");
@@ -110,8 +114,9 @@ public class UserManagementImpl extends AbstractREST implements UserManagementSe
 			String query = Joiner.on('&').join(atts.stream().map(attr -> attr.getName().concat("=").concat(attr.getValue())).collect(Collectors.toList()));
 			
 			groups = get(resource, query, List.class);
-		} catch(URISyntaxException ex) {
+		} catch(Exception ex) {
 			LOGGER.logException(ex);
+			throw new FrameworkException(ex.getMessage());
 		}
 		
 		LOGGER.exitMethod("searchGroups");
@@ -125,8 +130,9 @@ public class UserManagementImpl extends AbstractREST implements UserManagementSe
 		Group group = null;
 		try {
 			group = get(MessageFormat.format("/userMgmt-service/{0}/groups/{1}", ServiceConstants.VERSION, internalId), Group.class);
-		} catch(URISyntaxException ex) {
+		} catch(Exception ex) {
 			LOGGER.logException(ex);
+			throw new FrameworkException(ex.getMessage());
 		}
 		
 		LOGGER.exitMethod("fetchGroup");
@@ -143,8 +149,9 @@ public class UserManagementImpl extends AbstractREST implements UserManagementSe
 			} else {
 				put(MessageFormat.format("/userMgmt-service/{0}/groups/{1}", ServiceConstants.VERSION, group.getId()), group);
 			}
-		} catch(URISyntaxException ex) {
+		} catch(Exception ex) {
 			LOGGER.logException(ex);
+			throw new FrameworkException(ex.getMessage());
 		}
 
 		LOGGER.exitMethod("saveGroup");
@@ -157,8 +164,9 @@ public class UserManagementImpl extends AbstractREST implements UserManagementSe
 		try {
 			String query = MessageFormat.format("groupIds={0}", Joiner.on(',').join(groupIds));
 			delete(MessageFormat.format("/userMgmt-service/{0}/groups", ServiceConstants.VERSION), query);
-		} catch(URISyntaxException ex) {
+		} catch(Exception ex) {
 			LOGGER.logException(ex);
+			throw new FrameworkException(ex.getMessage());
 		}
 		
 		LOGGER.exitMethod("deleteGroups");
