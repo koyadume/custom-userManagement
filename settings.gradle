@@ -1,4 +1,3 @@
-include 'userMgmt-sdk',
-		'userMgmt-sdk-impl', 
+include 'userMgmt-sdk', 
 		'userMgmt-service',
 		'userMgmt'

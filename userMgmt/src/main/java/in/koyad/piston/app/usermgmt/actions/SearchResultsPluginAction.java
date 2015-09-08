@@ -23,11 +23,11 @@ import org.koyad.piston.core.model.User;
 import org.koyad.piston.core.model.enums.PrincipalType;
 
 import in.koyad.piston.app.userMgmt.sdk.api.UserManagementService;
+import in.koyad.piston.app.userMgmt.sdk.impl.UserManagementImpl;
 import in.koyad.piston.app.usermgmt.forms.SearchForm;
 import in.koyad.piston.common.bo.Attribute;
 import in.koyad.piston.common.exceptions.FrameworkException;
 import in.koyad.piston.common.utils.LogUtil;
-import in.koyad.piston.common.utils.ServiceManager;
 import in.koyad.piston.controller.plugin.PluginAction;
 import in.koyad.piston.controller.plugin.annotations.AnnoPluginAction;
 import in.koyad.piston.ui.utils.FormUtils;
@@ -42,7 +42,7 @@ public class SearchResultsPluginAction extends PluginAction {
 
 	private static final LogUtil LOGGER = LogUtil.getLogger(SearchResultsPluginAction.class);
 	
-	private final UserManagementService userManagementService = ServiceManager.getService(UserManagementService.class);
+	private final UserManagementService userManagementService = new UserManagementImpl();
 	
 	@Override
 	public String execute() throws FrameworkException {

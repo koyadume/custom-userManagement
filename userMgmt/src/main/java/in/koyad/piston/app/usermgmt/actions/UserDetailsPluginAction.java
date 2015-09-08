@@ -18,11 +18,11 @@ package in.koyad.piston.app.usermgmt.actions;
 import org.koyad.piston.core.model.User;
 
 import in.koyad.piston.app.userMgmt.sdk.api.UserManagementService;
+import in.koyad.piston.app.userMgmt.sdk.impl.UserManagementImpl;
 import in.koyad.piston.app.usermgmt.forms.UserDetailsPluginForm;
 import in.koyad.piston.common.exceptions.FrameworkException;
 import in.koyad.piston.common.utils.BeanPropertyUtils;
 import in.koyad.piston.common.utils.LogUtil;
-import in.koyad.piston.common.utils.ServiceManager;
 import in.koyad.piston.controller.plugin.PluginAction;
 import in.koyad.piston.controller.plugin.annotations.AnnoPluginAction;
 import in.koyad.piston.ui.utils.RequestContextUtil;
@@ -32,7 +32,7 @@ import in.koyad.piston.ui.utils.RequestContextUtil;
 )
 public class UserDetailsPluginAction extends PluginAction {
 	
-	private final UserManagementService userManagementService = ServiceManager.getService(UserManagementService.class);
+	private final UserManagementService userManagementService = new UserManagementImpl();
 	
 	public static final String ACTION_NAME = "userDetails";
 
