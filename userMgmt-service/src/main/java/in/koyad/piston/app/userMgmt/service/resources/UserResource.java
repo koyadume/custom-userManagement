@@ -18,10 +18,10 @@ import javax.ws.rs.core.MediaType;
 import org.koyad.piston.core.model.User;
 
 import in.koyad.piston.app.userMgmt.sdk.api.UserManagementService;
+import in.koyad.piston.app.userMgmt.service.impl.DBUserManagementServiceImpl;
 import in.koyad.piston.common.bo.Attribute;
 import in.koyad.piston.common.exceptions.FrameworkException;
 import in.koyad.piston.common.utils.LogUtil;
-import in.koyad.piston.common.utils.ServiceManager;
 import in.koyad.piston.common.utils.StringUtil;
 
 @Path("/users")
@@ -31,7 +31,7 @@ public class UserResource {
 	
 	private static final LogUtil LOGGER = LogUtil.getLogger(UserResource.class);
 
-	private static final UserManagementService userMgmtService = ServiceManager.getService(UserManagementService.class);
+	private static final UserManagementService userMgmtService = new DBUserManagementServiceImpl();
 	
 	@GET
 	public List<User> searchUsers(@QueryParam("query") String query) throws FrameworkException {

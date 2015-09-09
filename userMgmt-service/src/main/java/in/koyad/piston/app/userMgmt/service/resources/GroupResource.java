@@ -18,10 +18,10 @@ import javax.ws.rs.core.MediaType;
 import org.koyad.piston.core.model.Group;
 
 import in.koyad.piston.app.userMgmt.sdk.api.UserManagementService;
+import in.koyad.piston.app.userMgmt.service.impl.DBUserManagementServiceImpl;
 import in.koyad.piston.common.bo.Attribute;
 import in.koyad.piston.common.exceptions.FrameworkException;
 import in.koyad.piston.common.utils.LogUtil;
-import in.koyad.piston.common.utils.ServiceManager;
 import in.koyad.piston.common.utils.StringUtil;
 
 @Path("/groups")
@@ -31,7 +31,7 @@ public class GroupResource {
 	
 	private static final LogUtil LOGGER = LogUtil.getLogger(GroupResource.class);
 	
-	private static final UserManagementService userMgmtService = ServiceManager.getService(UserManagementService.class);
+	private static final UserManagementService userMgmtService = new DBUserManagementServiceImpl();
 	
 	@GET
 	public List<Group> searchGroups(@QueryParam("query") String query) throws FrameworkException {
