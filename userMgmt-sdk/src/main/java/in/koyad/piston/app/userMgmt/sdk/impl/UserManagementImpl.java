@@ -20,6 +20,8 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import javax.ws.rs.core.MediaType;
+
 import org.koyad.piston.core.model.Group;
 import org.koyad.piston.core.model.User;
 
@@ -103,6 +105,7 @@ public class UserManagementImpl extends AbstractREST implements UserManagementSe
 				String userId = getClient()
 									.resource(ROOT_RESOURCE)
 									.path("users")
+									.type(MediaType.APPLICATION_JSON)
 									.post(String.class, user);
 				user.setId(userId);
 			} else {
@@ -111,6 +114,7 @@ public class UserManagementImpl extends AbstractREST implements UserManagementSe
 				getClient()
 					.resource(ROOT_RESOURCE)
 					.path("users").path(user.getId())
+					.type(MediaType.APPLICATION_JSON)
 					.put(String.class, user);
 			}
 		} catch(Exception ex) {
@@ -208,6 +212,7 @@ public class UserManagementImpl extends AbstractREST implements UserManagementSe
 				String groupId = getClient()
 									.resource(ROOT_RESOURCE)
 									.path("groups")
+									.type(MediaType.APPLICATION_JSON)
 									.post(String.class, group);
 				group.setId(groupId);
 			} else {
@@ -216,6 +221,7 @@ public class UserManagementImpl extends AbstractREST implements UserManagementSe
 				getClient()
 					.resource(ROOT_RESOURCE)
 					.path("groups").path(group.getId())
+					.type(MediaType.APPLICATION_JSON)
 					.put(String.class, group);
 			}
 		} catch(Exception ex) {
