@@ -62,12 +62,14 @@ public class UserResource {
 	}
 	
 	@POST
-	public void createUser(User user) throws FrameworkException {
+	@Produces(MediaType.TEXT_PLAIN)
+	public String createUser(User user) throws FrameworkException {
 		LOGGER.enterMethod("createUser");
 		
 		userMgmtService.saveUser(user);
 		
 		LOGGER.exitMethod("createUser");
+		return user.getId();
 	}
 	
 	@PUT

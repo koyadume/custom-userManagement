@@ -62,12 +62,14 @@ public class GroupResource {
 	}
 
 	@POST
-	public void createGroup(Group group) throws FrameworkException {
+	@Produces(MediaType.TEXT_PLAIN)
+	public String createGroup(Group group) throws FrameworkException {
 		LOGGER.enterMethod("createGroup");
 		
 		userMgmtService.saveGroup(group);
 		
 		LOGGER.exitMethod("createGroup");
+		return group.getId();
 	}
 	
 	@PUT
