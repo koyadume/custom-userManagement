@@ -9,33 +9,6 @@
 	</plugin:head>
 						
 	<plugin:body>
-		<style type="text/css">
-			td > div {
-			    background-color: #e6e6fc;
-			    min-height: 100px;
-			    min-width: 200px;
-			    padding: 10px 10px 0 0;
-			}
-			.horList1 {
-			    list-style: none outside none;
-			    margin: 0;
-			    padding-left: 0;
-			}
-			.horList1 > li {
-			    background-color: #f7f7f9;
-			    border-radius: 2px;
-			    display: inline-block;
-			    margin-bottom: 10px;
-			    margin-left: 10px;
-			    padding-left: 10px;
-			    padding-right: 10px;
-			}
-			.prin-del {
-			    cursor: pointer;
-			    margin-left: 10px;
-			}
-		</style>
-		
 		<c:if test="${not empty msg}">
 			<p class="msg-container">
 				<span class="fa fa-info-circle fa-lg" style="margin-left: 5px; margin-right: 5px; color: white;"></span>
@@ -54,11 +27,19 @@
 	                     </li>
 	                     <li>Password</li>
 	                     <li>
-	                    		<password property="title" size="100" />
+	                    		<password property="password" size="100" />
 	                     </li>
 	                     <li>First Name</li>
 	                     <li>
 	                          	<text property="firstName" size="100" />
+	                     </li>
+	                     <li>Last Name</li>
+	                     <li>
+	                          	<text property="lastName" size="100" />
+	                     </li>
+	                     <li>Email</li>
+	                     <li>
+	                          	<text property="email" size="100" />
 	                     </li>
 	                     <hidden property="id" />
 	                </ul>

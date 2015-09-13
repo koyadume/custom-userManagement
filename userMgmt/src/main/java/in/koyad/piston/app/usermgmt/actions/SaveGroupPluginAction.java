@@ -20,9 +20,11 @@ import org.koyad.piston.core.model.Group;
 import in.koyad.piston.app.userMgmt.sdk.api.UserManagementService;
 import in.koyad.piston.app.userMgmt.sdk.impl.UserManagementImpl;
 import in.koyad.piston.app.usermgmt.forms.GroupDetailsPluginForm;
+import in.koyad.piston.common.constants.MsgType;
 import in.koyad.piston.common.exceptions.FrameworkException;
 import in.koyad.piston.common.utils.BeanPropertyUtils;
 import in.koyad.piston.common.utils.LogUtil;
+import in.koyad.piston.common.utils.Message;
 import in.koyad.piston.controller.plugin.PluginAction;
 import in.koyad.piston.controller.plugin.annotations.AnnoPluginAction;
 import in.koyad.piston.ui.utils.FormUtils;
@@ -44,12 +46,19 @@ public class SaveGroupPluginAction extends PluginAction {
 		LOGGER.enterMethod("execute");
 		
 		GroupDetailsPluginForm form = FormUtils.createFormWithReqParams(GroupDetailsPluginForm.class);
-		Group group = new Group();
-		BeanPropertyUtils.copyProperties(group, form);
-		
-		userManagementService.saveGroup(group);
-		
-		form.setId(group.getId());
+		try {
+			Group group = new Group();
+			BeanPropertyUtils.copyProperties(group, form);
+			
+			userManagementService.saveGroup(group);
+			
+			form.setId(group.getId());
+			
+			RequestContextUtil.setRequestAttribute("msg", new Message(MsgType.INFO, "User details updated successfully."));
+		} catch(FrameworkException ex) {
+			LOGGER.logException(ex);
+			RequestContextUtil.setRequestAttribute("msg", new Message(MsgType.ERROR, "Error occured while updating user details."));
+		}
 		
 		RequestContextUtil.setRequestAttribute(GroupDetailsPluginForm.FORM_NAME, form);
 			
