@@ -21,6 +21,7 @@
 						<th>First Name</th>
 						<th>Last Name</th>
 						<th>Email</th>
+						<th>Actions</th>
 					</tr>
 					<c:iterate items="${users}" var="user">
 						<tr>
@@ -31,6 +32,11 @@
 							<td><c:out value="${user.firstName}" /></td>
 							<td><c:out value="${user.lastName}" /></td>
 							<td><c:out value="${user.email}" /></td>
+							<td>
+								<plugin:actionURL action="userDetails" title="Edit User" class="img-btn" faClass="fa fa-pencil fa-lg" faStyle="font-size: 1.2em;">
+									<plugin:param name="id" value="${user.id}" />
+								</plugin:actionURL>
+							</td>
 						</tr>
 					</c:iterate>
 				</table>
