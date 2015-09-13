@@ -4,44 +4,65 @@
 	xsi:schemaLocation="http://piston.koyad.in/html5 http://piston.koyad.in/html5 
 						http://piston.koyad.in/plugin http://piston.koyad.in/plugin 
 						http://piston.koyad.in/core http://piston.koyad.in/core">
+	<plugin:head>
+		<script type="text/javascript" src="js/app.js"></script>
+	</plugin:head>
+	
+	<plugin:body>
 		<div>
-			<fieldset>
-					<legend>Search</legend>
-				    <div style="padding: 5px;">
-				    	<form method="POST" action="searchResults">
-				    		<p>
-				        		<span style="padding-right: 8px;">
-				        			<b>Select type</b>
-				        		</span>
-					        	<label> 
-					        		<input name="searchType" type="radio" class="pseudo-search-type" value="USER" />
-					        		<t>Users</t>
-					        	</label>
-					        	<label>
-					        		<input name="searchType" type="radio" class="pseudo-search-type" value="GROUP" />
-					        		<t>Groups</t>
-					        	</label>
-				        	</p>
-				        	<p>
-				                <select property="searchAttr" class="pseudo-search-dropdown">
-				                	<option value=""><t>-- Select --</t></option>
-				                </select>
-				                <text property="searchAttrValue" value="" style="margin-left: 10px; margin-bottom: 5px !important;" />
-			                </p>
-			                <p>
-			                	<pButton class="btn pseudo-search" faClass="fa fa-search fa-lg" faStyle="font-size: 1.2em; padding-right: 6px;"> 
-					  					<c:out value="Search" />
-					  			</pButton>
-			                </p>
-		                </form>
-				    </div>
+			<fieldset style="margin: 12px;">
+				<legend>Create</legend>
+				<p style="padding-left: 10px;">
+					<plugin:actionURL action="groupDetails" class="btn" style="margin-left: 20px;" 
+							faClass="fa fa-plus fa-lg" faStyle="font-size: 1.2em;  padding-right: 6px;">
+						<c:out value="Add Group" />
+					</plugin:actionURL>
+					
+					<plugin:actionURL action="userDetails" class="btn" style="margin-left: 20px;" 
+							faClass="fa fa-plus fa-lg" faStyle="font-size: 1.2em;  padding-right: 6px;">
+						<c:out value="Add User" />
+					</plugin:actionURL>
+				</p>
+			</fieldset>
+		
+			<fieldset style="margin: 12px;">
+				<legend>Search</legend>
+			    <div style="padding: 5px;">
+			    	<form method="POST" action="searchResults">
+			    		<p>
+			        		<span style="padding-right: 8px;">
+			        			<b>Select type</b>
+			        		</span>
+				        	<label> 
+				        		<input name="searchType" type="radio" class="pseudo-search-type" value="USER" />
+				        		<t>Users</t>
+				        	</label>
+				        	<label>
+				        		<input name="searchType" type="radio" class="pseudo-search-type" value="GROUP" />
+				        		<t>Groups</t>
+				        	</label>
+			        	</p>
+			        	<p>
+			                <select property="searchAttr" class="pseudo-search-dropdown">
+			                	<option value=""><t>-- Select --</t></option>
+			                </select>
+			                <text property="searchAttrValue" value="" style="margin-left: 10px; margin-bottom: 5px !important;" />
+		                </p>
+		                <p>
+		                	<pButton class="btn pseudo-search" faClass="fa fa-search fa-lg" faStyle="font-size: 1.2em; padding-right: 6px;"> 
+				  					<c:out value="Search" />
+				  			</pButton>
+		                </p>
+	                </form>
+			    </div>
 			</fieldset>   
 				  
 		    <div>
 		    	<div class="pseudo-waitSearchResults" style="display:none;">
-		    		<img src="img/ajax-loader.gif" style="margin: 15px auto; display: block;" />
+		    		<img src="img/ajax-loader.gif" style="margin: 15px auto; display: block;" context="global" />
 		    	</div>
 		    	<div class="pseudo-searchResults"></div>
 		    </div>
 		</div>
+	</plugin:body>
 </plugin:page>

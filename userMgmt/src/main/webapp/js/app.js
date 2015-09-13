@@ -41,7 +41,7 @@ $(function() {
        		async : false,
             url: '/piston/ajaxPlugin',
             type: 'POST',
-    		data: form.serializeArray(),
+    		data: $(this).closest('form').serializeArray(),
             success: function(data) {
             	$('.pseudo-waitSearchResults').hide();
 				$('.pseudo-searchResults').html(data);
@@ -49,14 +49,14 @@ $(function() {
     	});
     });
 	
-	$('.pseudo-delete-principals').click(function() {
+	$('.pseudo-searchResults').on('click', '.pseudo-delete-principals', function() {
     	$('.pseudo-waitSearchResults').show();
     	$('.pseudo-searchResults').html('');
     	$.ajax({
        		async : false,
             url: '/piston/ajaxPlugin',
             type: 'POST',
-    		data: form.serializeArray(),
+    		data: $(this).closest('form').serializeArray(),
             success: function(data) {
             	$('.pseudo-waitSearchResults').hide();
 				$('.pseudo-searchResults').html(data);
