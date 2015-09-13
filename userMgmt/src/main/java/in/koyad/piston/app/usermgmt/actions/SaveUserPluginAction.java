@@ -25,6 +25,7 @@ import in.koyad.piston.common.exceptions.FrameworkException;
 import in.koyad.piston.common.utils.BeanPropertyUtils;
 import in.koyad.piston.common.utils.LogUtil;
 import in.koyad.piston.common.utils.Message;
+import in.koyad.piston.common.utils.StringUtil;
 import in.koyad.piston.controller.plugin.PluginAction;
 import in.koyad.piston.controller.plugin.annotations.AnnoPluginAction;
 import in.koyad.piston.ui.utils.FormUtils;
@@ -52,12 +53,20 @@ public class SaveUserPluginAction extends PluginAction {
 			
 			userManagementService.saveUser(user);
 			
-			form.setId(user.getId());
-			
-			RequestContextUtil.setRequestAttribute("msg", new Message(MsgType.INFO, "User details updated successfully."));
+			if(StringUtil.isEmpty(form.getId())) {
+				form.setId(user.getId());
+				RequestContextUtil.setRequestAttribute("msg", new Message(MsgType.INFO, "User created successfully."));
+			} else {
+				RequestContextUtil.setRequestAttribute("msg", new Message(MsgType.INFO, "User details updated successfully."));
+			}
 		} catch(FrameworkException ex) {
 			LOGGER.logException(ex);
-			RequestContextUtil.setRequestAttribute("msg", new Message(MsgType.ERROR, "Error occured while updating user details."));
+			
+			if(StringUtil.isEmpty(form.getId())) {
+				RequestContextUtil.setRequestAttribute("msg", new Message(MsgType.ERROR, "Error occured while creating user."));
+			} else {
+				RequestContextUtil.setRequestAttribute("msg", new Message(MsgType.ERROR, "Error occured while updating user details."));
+			}
 		}
 		
 		RequestContextUtil.setRequestAttribute(UserDetailsPluginForm.FORM_NAME, form);

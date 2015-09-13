@@ -32,11 +32,14 @@ $(function() {
         	searchDropDown.append('<option value="">--Select--</option>')
 	  			.append('<option value="name">Name</option>');
         }
+		
+		$('.pseudo-attr-value').val('');
 	});
 	
 	$('.pseudo-search').click(function() {
     	$('.pseudo-waitSearchResults').show();
     	$('.pseudo-searchResults').html('');
+    	var form = getPluginFormWithAction($(this), 'searchResults');
     	$.ajax({
        		async : false,
             url: '/piston/ajaxPlugin',
@@ -51,16 +54,52 @@ $(function() {
 	
 	$('.pseudo-searchResults').on('click', '.pseudo-delete-principals', function() {
     	$('.pseudo-waitSearchResults').show();
-    	$('.pseudo-searchResults').html('');
+    	$('.pseudo-searchResults').hide();
+    	var form = getPluginFormWithAction($(this), 'deletePrincipals');
     	$.ajax({
        		async : false,
             url: '/piston/ajaxPlugin',
             type: 'POST',
-    		data: $(this).closest('form').serializeArray(),
+    		data: form.serializeArray(),
             success: function(data) {
             	$('.pseudo-waitSearchResults').hide();
 				$('.pseudo-searchResults').html(data);
+				$('.pseudo-searchResults').show();
             }
     	});
+    });
+	
+	$('.pseudo-add-member').click(function() {
+    	targetRole = $(this).closest('tr').find('.pseudo-member-container');
+    	var modal = $('.pseudo-full-modal');
+    	modal.show();
+    	
+    	modal.css('top', $(window).scrollTop() + 'px');
+    	$('html, body').css({
+    	    'overflow': 'hidden'
+    	});
+    	
+    	$.ajax({
+    		async : false,
+            url: '/piston/web/getAjaxView?view=searchUsersGroupsDB',
+            type: 'GET',
+            success: function(data) {
+                modal.find('.pseudo-loader').hide();
+                modal.find('.pseudo-full-modal-content').html(data);
+            }
+    	});
+    });
+    
+    $('.horList1').on("click", '.prin-del', function(ev) {
+    	var principal = $(this).prev().html().trim();
+    	$('.pseudo-role').each(function() {
+    	    var value = $(this).val().substr($(this).val().indexOf(':') + 1);
+	    	if(value == principal) {
+	    		$(this).remove();
+	    		return false;
+	    	} 
+	    });
+    	
+    	$(this).parent().remove(); 
     });
 });

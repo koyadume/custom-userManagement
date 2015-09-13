@@ -222,7 +222,7 @@ public class UserManagementImpl extends AbstractREST implements UserManagementSe
 					.resource(ROOT_RESOURCE)
 					.path("groups").path(group.getId())
 					.type(MediaType.APPLICATION_JSON)
-					.put(String.class, group);
+					.put(group);
 			}
 		} catch(Exception ex) {
 			LOGGER.logException(ex);

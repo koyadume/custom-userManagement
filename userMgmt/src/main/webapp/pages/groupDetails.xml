@@ -5,7 +5,7 @@
 						http://piston.koyad.in/plugin http://piston.koyad.in/plugin 
 						http://piston.koyad.in/core http://piston.koyad.in/core">
 	<plugin:head>
-		<script type="text/javascript" src="js/globalPermissions.js" context="global"></script>
+		<script type="text/javascript" src="js/app.js"></script>
 	</plugin:head>
 						
 	<plugin:body>
@@ -35,7 +35,7 @@
 			    margin-left: 10px;
 			}
 		</style>
-		
+	
 		<c:if test="${not empty msg}">
 			<p class="msg-container">
 				<span class="fa fa-info-circle fa-lg" style="margin-left: 5px; margin-right: 5px; color: white;"></span>
@@ -55,6 +55,42 @@
 	                     <hidden property="id" />
 	                </ul>
 	        	</fieldset>
+	        	
+	        	<fieldset style="margin-top: 20px; padding: 20px;">
+					<legend>Group members</legend>
+					<table style="width: 100%;" class="piston-table">
+						<tr>
+							<th>
+								Members
+							</th>
+							<th>
+								Actions
+							</th>
+						</tr>
+						<tr>
+							<td style="padding: 0px;">
+								<div id="members" class="pseudo-member-container">
+									<ul class="horList1">
+										<c:iterate items="${groupDetails.members}" var="member">
+											<li>
+												<span><c:out value="${member.split(':')[1]}" /></span>
+												<span class="prin-del">x</span>
+											</li>
+										</c:iterate>
+									</ul>
+									<c:iterate items="${groupDetails.members}" var="member">
+										<input class="pseudo-role" type="hidden" name="members" value="${member}" />
+									</c:iterate>
+								</div>
+							</td>
+							<td style="text-align: center;">
+								<pButton class="btn pseudo-add-member" faClass="fa fa-plus fa-lg" faStyle="font-size: 1.2em; padding-right: 6px;"> 
+			  						<c:out value="Add" />
+					  			</pButton>
+							</td>
+						</tr>
+					</table>   
+				</fieldset>
 				
 				<div style="text-align: right; margin-top: 20px;">
 					<pButton class="btn pseudo-submit-button" faClass="fa fa-save fa-lg" faStyle="font-size: 1.2em; padding-right: 6px;"> 
