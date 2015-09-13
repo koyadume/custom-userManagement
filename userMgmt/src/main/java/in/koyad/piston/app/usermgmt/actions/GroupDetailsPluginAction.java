@@ -20,9 +20,8 @@ import org.koyad.piston.core.model.Group;
 import in.koyad.piston.app.userMgmt.sdk.api.UserManagementService;
 import in.koyad.piston.app.userMgmt.sdk.impl.UserManagementImpl;
 import in.koyad.piston.app.usermgmt.forms.GroupDetailsPluginForm;
-import in.koyad.piston.app.usermgmt.forms.UserDetailsPluginForm;
+import in.koyad.piston.app.usermgmt.utils.PopulateFormUtil;
 import in.koyad.piston.common.exceptions.FrameworkException;
-import in.koyad.piston.common.utils.BeanPropertyUtils;
 import in.koyad.piston.common.utils.LogUtil;
 import in.koyad.piston.controller.plugin.PluginAction;
 import in.koyad.piston.controller.plugin.annotations.AnnoPluginAction;
@@ -43,15 +42,16 @@ public class GroupDetailsPluginAction extends PluginAction {
 	public String execute() throws FrameworkException {
 		LOGGER.enterMethod("execute");
 		
+		
 		String groupId = RequestContextUtil.getParameter("id");
 		
 		if(null != groupId) {
 			Group group = userManagementService.fetchGroup(groupId);
 
 			GroupDetailsPluginForm form = new GroupDetailsPluginForm();
-			BeanPropertyUtils.copyProperties(form, group);
+			PopulateFormUtil.populateGroupDetails(form, group);
 			
-			RequestContextUtil.setRequestAttribute(UserDetailsPluginForm.FORM_NAME, form);
+			RequestContextUtil.setRequestAttribute(GroupDetailsPluginForm.FORM_NAME, form);
 		}
 			
 		LOGGER.exitMethod("execute");

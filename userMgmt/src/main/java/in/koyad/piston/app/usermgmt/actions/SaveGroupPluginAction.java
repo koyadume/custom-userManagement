@@ -15,16 +15,22 @@
  */
 package in.koyad.piston.app.usermgmt.actions;
 
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+
 import org.koyad.piston.core.model.Group;
+import org.koyad.piston.core.model.User;
 
 import in.koyad.piston.app.userMgmt.sdk.api.UserManagementService;
 import in.koyad.piston.app.userMgmt.sdk.impl.UserManagementImpl;
 import in.koyad.piston.app.usermgmt.forms.GroupDetailsPluginForm;
+import in.koyad.piston.common.bo.Attribute;
 import in.koyad.piston.common.constants.MsgType;
 import in.koyad.piston.common.exceptions.FrameworkException;
-import in.koyad.piston.common.utils.BeanPropertyUtils;
 import in.koyad.piston.common.utils.LogUtil;
 import in.koyad.piston.common.utils.Message;
+import in.koyad.piston.common.utils.StringUtil;
 import in.koyad.piston.controller.plugin.PluginAction;
 import in.koyad.piston.controller.plugin.annotations.AnnoPluginAction;
 import in.koyad.piston.ui.utils.FormUtils;
@@ -48,16 +54,39 @@ public class SaveGroupPluginAction extends PluginAction {
 		GroupDetailsPluginForm form = FormUtils.createFormWithReqParams(GroupDetailsPluginForm.class);
 		try {
 			Group group = new Group();
-			BeanPropertyUtils.copyProperties(group, form);
+//			BeanPropertyUtils.copyProperties(group, form);
+			group.setId(form.getId());
+			group.setName(form.getName());
+			
+			if(null != form.getMembers()) {
+				List<User> members = new ArrayList<>();
+				for(String member : form.getMembers()) {
+					List<Attribute> atts = new ArrayList<>();
+					atts.add(new Attribute("uid", member.split(":")[1]));
+					
+					User user = userManagementService.searchUsers(atts).get(0);
+					
+					members.add(user);
+				}
+				group.setMembers(new HashSet<>(members));
+			}
 			
 			userManagementService.saveGroup(group);
 			
-			form.setId(group.getId());
-			
-			RequestContextUtil.setRequestAttribute("msg", new Message(MsgType.INFO, "User details updated successfully."));
+			if(StringUtil.isEmpty(form.getId())) {
+				form.setId(group.getId());
+				RequestContextUtil.setRequestAttribute("msg", new Message(MsgType.INFO, "Group created successfully."));
+			} else {
+				RequestContextUtil.setRequestAttribute("msg", new Message(MsgType.INFO, "Group details updated successfully."));
+			}
 		} catch(FrameworkException ex) {
 			LOGGER.logException(ex);
-			RequestContextUtil.setRequestAttribute("msg", new Message(MsgType.ERROR, "Error occured while updating user details."));
+			
+			if(StringUtil.isEmpty(form.getId())) {
+				RequestContextUtil.setRequestAttribute("msg", new Message(MsgType.ERROR, "Error occured while creating group."));
+			} else {
+				RequestContextUtil.setRequestAttribute("msg", new Message(MsgType.ERROR, "Error occured while updating group details."));
+			}
 		}
 		
 		RequestContextUtil.setRequestAttribute(GroupDetailsPluginForm.FORM_NAME, form);

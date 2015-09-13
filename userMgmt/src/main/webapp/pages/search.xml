@@ -25,10 +25,10 @@
 				</p>
 			</fieldset>
 		
-			<fieldset style="margin: 12px;">
-				<legend>Search</legend>
-			    <div style="padding: 5px;">
-			    	<form method="POST" action="searchResults">
+			<form method="POST" action="">
+				<fieldset style="margin: 12px;">
+					<legend>Search</legend>
+				    <div style="padding: 5px;">
 			    		<p>
 			        		<span style="padding-right: 8px;">
 			        			<b>Select type</b>
@@ -46,23 +46,23 @@
 			                <select property="searchAttr" class="pseudo-search-dropdown">
 			                	<option value=""><t>-- Select --</t></option>
 			                </select>
-			                <text property="searchAttrValue" value="" style="margin-left: 10px; margin-bottom: 5px !important;" />
+			                <text property="searchAttrValue" class="pseudo-attr-value" value="" style="margin-left: 10px; margin-bottom: 5px !important;" />
 		                </p>
 		                <p>
 		                	<pButton class="btn pseudo-search" faClass="fa fa-search fa-lg" faStyle="font-size: 1.2em; padding-right: 6px;"> 
 				  					<c:out value="Search" />
 				  			</pButton>
 		                </p>
-	                </form>
+				    </div>
+				</fieldset>   
+					  
+			    <div>
+			    	<div class="pseudo-waitSearchResults" style="display:none;">
+			    		<img src="img/ajax-loader.gif" style="margin: 15px auto; display: block;" context="global" />
+			    	</div>
+			    	<div class="pseudo-searchResults"></div>
 			    </div>
-			</fieldset>   
-				  
-		    <div>
-		    	<div class="pseudo-waitSearchResults" style="display:none;">
-		    		<img src="img/ajax-loader.gif" style="margin: 15px auto; display: block;" context="global" />
-		    	</div>
-		    	<div class="pseudo-searchResults"></div>
-		    </div>
+			</form>
 		</div>
 	</plugin:body>
 </plugin:page>

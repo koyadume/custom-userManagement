@@ -48,15 +48,14 @@ public class DeletePrincipalsPluginAction extends PluginAction {
 	protected String execute() throws FrameworkException {
 		LOGGER.enterMethod("execute");
 		
-		DeletePrincipalsPluginForm form = null;
+		SearchForm form = FormUtils.createFormWithReqParams(SearchForm.class);
+		DeletePrincipalsPluginForm delForm = FormUtils.createFormWithReqParams(DeletePrincipalsPluginForm.class);;
 		try {
-			form = FormUtils.createFormWithReqParams(DeletePrincipalsPluginForm.class); 
-			String[] principalIds = form.getPrincipalIds();
+			String[] principalIds = delForm.getPrincipalIds();
 			
-			SearchForm searchForm = FormUtils.createFormWithReqParams(SearchForm.class);
-			if(searchForm.getSearchType().equalsIgnoreCase(PrincipalType.USER.name())) {
+			if(form.getSearchType().equalsIgnoreCase(PrincipalType.USER.name())) {
 				userManagementService.deleteUsers(Arrays.asList(principalIds));
-			} else if(searchForm.getSearchType().equalsIgnoreCase(PrincipalType.GROUP.name())) {
+			} else if(form.getSearchType().equalsIgnoreCase(PrincipalType.GROUP.name())) {
 				userManagementService.deleteGroups(Arrays.asList(principalIds));
 			}
 			
