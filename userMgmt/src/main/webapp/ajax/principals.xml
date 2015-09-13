@@ -11,57 +11,67 @@
 			</p>
 		</c:if>
 		
-		<c:if test="${not empty groups}">
-			<div style="padding: 10px;">
-				<form name="deletePrincipals" method="POST" action="deletePrincipals">
-					<c:if test="${searchType == 'USER' && not empty users}">
-						<table class="piston-table">
-			           		<tr>
-								<th>Select</th>
-								<th>UID</th>
-							</tr>
-							<c:iterate items="${users}" var="user">
-								<tr>
-									<td style="text-align:center;">
-										<checkbox property="principalIds" value="${user.id}" />
-									</td>
-									<td><c:out value="${user.uid}" /></td>
-								</tr>
-							</c:iterate>
-						</table>
-					</c:if>
-
-					<c:if test="${searchType == 'GROUP' && not empty groups}">
-						<table class="piston-table">
+		<div style="padding: 10px;">
+			<form name="deletePrincipals" method="POST" action="deletePrincipals">
+				<c:if test="${searchType == 'USER' and not empty users}">
+					<table class="piston-table" style="width: 100%;">
+		           		<tr>
+							<th>Select</th>
+							<th>UID</th>
+							<th>First Name</th>
+							<th>Last Name</th>
+							<th>Email</th>
+						</tr>
+						<c:iterate items="${users}" var="user">
 							<tr>
-								<th>Select</th>
-								<th>Name</th>
+								<td style="text-align:center;">
+									<checkbox property="principalIds" value="${user.id}" />
+								</td>
+								<td><c:out value="${user.uid}" /></td>
+								<td><c:out value="${user.firstName}" /></td>
+								<td><c:out value="${user.lastName}" /></td>
+								<td><c:out value="${user.email}" /></td>
 							</tr>
-							<c:iterate items="${groups}" var="group">
-								<tr>
-									<td style="text-align:center;">
-										<checkbox property="principalIds" value="${group.id}" />
-									</td>
-									<td><c:out value="${group.name}" /></td>
-								</tr>
-							</c:iterate>
-						</table>
-					</c:if>
+						</c:iterate>
+					</table>
 					
 					<p style="padding-left: 10px;">
 						<pButton class="btn pseudo-delete-principals" faClass="fa fa-trash fa-lg" faStyle="font-size: 1.2em; padding-right: 6px;"> 
 		  					<c:out value="Delete" />
 		  				</pButton>
 	  				</p>
-				</form>
-			</div>
-		</c:if>
-		
-		<c:if test="${searchType == 'USER' && not empty users}">
-			<c:out value="No user found." />
-		</c:if>
-		<c:if test="${searchType == 'GROUP' && not empty groups}">
-			<c:out value="No group found." />
-		</c:if>
+				</c:if>
+
+				<c:if test="${searchType == 'GROUP' and not empty groups}">
+					<table class="piston-table" style="width: 100%;">
+						<tr>
+							<th>Select</th>
+							<th>Name</th>
+						</tr>
+						<c:iterate items="${groups}" var="group">
+							<tr>
+								<td style="text-align:center;">
+									<checkbox property="principalIds" value="${group.id}" />
+								</td>
+								<td><c:out value="${group.name}" /></td>
+							</tr>
+						</c:iterate>
+					</table>
+					
+					<p style="padding-left: 10px;">
+						<pButton class="btn pseudo-delete-principals" faClass="fa fa-trash fa-lg" faStyle="font-size: 1.2em; padding-right: 6px;"> 
+		  					<c:out value="Delete" />
+		  				</pButton>
+	  				</p>
+				</c:if>
+			</form>
+			
+			<c:if test="${searchType == 'USER' and empty users}">
+				<c:out value="No user found." />
+			</c:if>
+			<c:if test="${searchType == 'GROUP' and empty groups}">
+				<c:out value="No group found." />
+			</c:if>
+		</div>
 	</plugin:body>
 </plugin:page>

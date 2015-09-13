@@ -48,7 +48,7 @@ public class SearchResultsPluginAction extends PluginAction {
 	public String execute() throws FrameworkException {
 		LOGGER.enterMethod("execute");
 	
-		SearchForm form = null;
+		SearchForm form = FormUtils.createFormWithReqParams(SearchForm.class);
 		try {
 			Attribute attr = new Attribute(form.getSearchAttr(), form.getSearchAttrValue());
 			List<Attribute> atts = new ArrayList<>();
@@ -69,7 +69,7 @@ public class SearchResultsPluginAction extends PluginAction {
 		}
 		
 		LOGGER.exitMethod("execute");
-		return "/pages/principals.xml";
+		return "/ajax/principals.xml";
 	}
 
 }

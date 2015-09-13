@@ -13,17 +13,17 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package in.koyad.piston.app.steam.plugins;
+package in.koyad.piston.app.usermgmt.plugins;
 
 import in.koyad.piston.app.usermgmt.actions.SearchPluginAction;
 import in.koyad.piston.common.utils.LogUtil;
 import in.koyad.piston.controller.plugin.Plugin;
 import in.koyad.piston.controller.plugin.annotations.AnnoPlugin;
 
-@AnnoPlugin(name = "userStore", title = "User Store", defaultAction = SearchPluginAction.ACTION_NAME)
-public class UserStorePlugin extends Plugin {
+@AnnoPlugin(name = "userStore", title = "User Management", defaultAction = SearchPluginAction.ACTION_NAME)
+public class UserManagementPlugin extends Plugin {
 
-	private static final LogUtil LOGGER = LogUtil.getLogger(UserStorePlugin.class);
+	private static final LogUtil LOGGER = LogUtil.getLogger(UserManagementPlugin.class);
 
 	@Override
 	public void preProcess() {
