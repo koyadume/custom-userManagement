@@ -20,6 +20,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import javax.ws.rs.client.Entity;
 import javax.ws.rs.core.MediaType;
 
 import org.koyad.piston.core.model.Group;
@@ -32,6 +33,7 @@ import in.koyad.piston.common.bo.Attribute;
 import in.koyad.piston.common.exceptions.FrameworkException;
 import in.koyad.piston.common.utils.AbstractREST;
 import in.koyad.piston.common.utils.LogUtil;
+import in.koyad.piston.common.utils.RestServiceUtil;
 import in.koyad.piston.common.utils.StringUtil;
 
 public class UserManagementImpl extends AbstractREST implements UserManagementService {
@@ -57,10 +59,11 @@ public class UserManagementImpl extends AbstractREST implements UserManagementSe
 									).concat(")");
 //			
 //			users = get(resource, query, List.class);
-			User[] users1 = getClient()
-								.resource(ROOT_RESOURCE)
+			User[] users1 = RestServiceUtil.getClient()
+								.target(ROOT_RESOURCE)
 								.path("users")
 								.queryParam("query", query)
+								.request()
 								.get(User[].class);
 			
 			users = Arrays.asList(users1);
@@ -81,9 +84,10 @@ public class UserManagementImpl extends AbstractREST implements UserManagementSe
 		try {
 //			user = get(MessageFormat.format("/userMgmt-service/{0}/users/{1}", ServiceConstants.VERSION, internalId), User.class);
 			
-			user = getClient()
-						.resource(ROOT_RESOURCE)
+			user = RestServiceUtil.getClient()
+						.target(ROOT_RESOURCE)
 						.path("users").path(internalId)
+						.request()
 						.get(User.class);
 		} catch(Exception ex) {
 			LOGGER.logException(ex);
@@ -102,20 +106,20 @@ public class UserManagementImpl extends AbstractREST implements UserManagementSe
 			if(StringUtil.isEmpty(user.getId())) {
 //				post(MessageFormat.format("/userMgmt-service/{0}/users", ServiceConstants.VERSION), user);
 				
-				String userId = getClient()
-									.resource(ROOT_RESOURCE)
+				String userId = RestServiceUtil.getClient()
+									.target(ROOT_RESOURCE)
 									.path("users")
-									.type(MediaType.APPLICATION_JSON)
-									.post(String.class, user);
+									.request()
+									.post(Entity.json(user),String.class);
 				user.setId(userId);
 			} else {
 //				put(MessageFormat.format("/userMgmt-service/{0}/users/{1}", ServiceConstants.VERSION, user.getId()), user);
 				
-				getClient()
-					.resource(ROOT_RESOURCE)
+				RestServiceUtil.getClient()
+					.target(ROOT_RESOURCE)
 					.path("users").path(user.getId())
-					.type(MediaType.APPLICATION_JSON)
-					.put(user);
+					.request()
+					.put(Entity.json(user));
 			}
 		} catch(Exception ex) {
 			LOGGER.logException(ex);
@@ -133,10 +137,11 @@ public class UserManagementImpl extends AbstractREST implements UserManagementSe
 //			String query = MessageFormat.format("userIds={0}", Joiner.on(',').join(userIds));
 //			delete(MessageFormat.format("/userMgmt-service/{0}/users", ServiceConstants.VERSION), query);
 			
-			getClient()
-				.resource(ROOT_RESOURCE)
+			RestServiceUtil.getClient()
+				.target(ROOT_RESOURCE)
 				.path("users")
 				.queryParam("userIds", Joiner.on(',').join(userIds))
+				.request()
 				.delete();
 		} catch(Exception ex) {
 			LOGGER.logException(ex);
@@ -164,10 +169,11 @@ public class UserManagementImpl extends AbstractREST implements UserManagementSe
 												)
 								).concat(")");
 			
-			Group[] groups1 = getClient()
-								.resource(ROOT_RESOURCE)
+			Group[] groups1 = RestServiceUtil.getClient()
+								.target(ROOT_RESOURCE)
 								.path("groups")
 								.queryParam("query", query)
+								.request()
 								.get(Group[].class);
 
 			groups = Arrays.asList(groups1);
@@ -188,9 +194,10 @@ public class UserManagementImpl extends AbstractREST implements UserManagementSe
 		try {
 //			group = get(MessageFormat.format("/userMgmt-service/{0}/groups/{1}", ServiceConstants.VERSION, internalId), Group.class);
 			
-			group = getClient()
-					.resource(ROOT_RESOURCE)
+			group = RestServiceUtil.getClient()
+					.target(ROOT_RESOURCE)
 					.path("groups").path(internalId)
+					.request()
 					.get(Group.class);
 		} catch(Exception ex) {
 			LOGGER.logException(ex);
@@ -209,20 +216,20 @@ public class UserManagementImpl extends AbstractREST implements UserManagementSe
 			if(StringUtil.isEmpty(group.getId())) {
 //				post(MessageFormat.format("/userMgmt-service/{0}/groups", ServiceConstants.VERSION), group);
 				
-				String groupId = getClient()
-									.resource(ROOT_RESOURCE)
+				String groupId = RestServiceUtil.getClient()
+									.target(ROOT_RESOURCE)
 									.path("groups")
-									.type(MediaType.APPLICATION_JSON)
-									.post(String.class, group);
+									.request()
+									.post(Entity.json(group), String.class);
 				group.setId(groupId);
 			} else {
 //				put(MessageFormat.format("/userMgmt-service/{0}/groups/{1}", ServiceConstants.VERSION, group.getId()), group);
 				
-				getClient()
-					.resource(ROOT_RESOURCE)
+				RestServiceUtil.getClient()
+					.target(ROOT_RESOURCE)
 					.path("groups").path(group.getId())
-					.type(MediaType.APPLICATION_JSON)
-					.put(group);
+					.request()
+					.put(Entity.json(group));
 			}
 		} catch(Exception ex) {
 			LOGGER.logException(ex);
@@ -240,10 +247,11 @@ public class UserManagementImpl extends AbstractREST implements UserManagementSe
 //			String query = MessageFormat.format("groupIds={0}", Joiner.on(',').join(groupIds));
 //			delete(MessageFormat.format("/userMgmt-service/{0}/groups", ServiceConstants.VERSION), query);
 			
-			getClient()
-				.resource(ROOT_RESOURCE)
+			RestServiceUtil.getClient()
+				.target(ROOT_RESOURCE)
 				.path("groups")
 				.queryParam("groupIds", Joiner.on(',').join(groupIds))
+				.request()
 				.delete();
 		} catch(Exception ex) {
 			LOGGER.logException(ex);
