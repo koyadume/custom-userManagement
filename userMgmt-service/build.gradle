@@ -2,15 +2,13 @@ apply plugin: 'war'
 
 dependencies {  
     compile project(':userMgmt-sdk'),
-    		'javax.ws.rs:javax.ws.rs-api:2.0.1',
-    		'in.koyad.piston.core:piston-dao:2.x',
-    		'in.koyad.piston.core:piston-sdk:2.x'
+    		"in.koyad.piston.core:piston-dao:$pistonVersion",
+    		"in.koyad.piston.core:piston-sdk:$pistonVersion",
+    		"org.glassfish.jersey.containers:jersey-container-servlet:$jerseyVersion"
 
-    runtime 'org.glassfish.jersey.containers:jersey-container-servlet:2.21',
-            'org.glassfish.jersey.media:jersey-media-json-jackson:2.21',
-            'org.hibernate:hibernate-entitymanager:4.3.8.Final'
+    runtime 'org.hibernate:hibernate-entitymanager:4.3.8.Final'
 
-    provided 'javax:javaee-web-api:7.0'
+    provided "javax.servlet:javax.servlet-api:$servletVersion"
     		 
     testRuntime 'org.mariadb.jdbc:mariadb-java-client:1.2.0'
 }

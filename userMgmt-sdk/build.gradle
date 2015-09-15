@@ -1,6 +1,5 @@
 dependencies {
 	
-	provided 'in.koyad.piston.core:piston-common:2.x', 
-			 'in.koyad.piston.core:piston-model:2.x'
+	provided "in.koyad.piston.core:piston-common:$pistonVersion" 
 			 
 }
