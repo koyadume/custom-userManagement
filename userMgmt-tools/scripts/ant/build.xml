@@ -13,11 +13,9 @@
 		<classpath refid="extLibs"/>
 	</taskdef>
 	
-	<property name="tomcat-installDir" value="${env.PISTON_WORKSPACE}/servers/tomcat-${tomcat-majorVersion}.0.${tomcat-minorVersion}" />
-	
 	<target name="configureTomcat">
 		<echo message="Configuring tomcat .." />
-		<property name="server-configFile" value="${tomcat-installDir}/conf/server.xml" />
+		<property name="server-configFile" value="${env.CATALINA_HOME}/conf/server.xml" />
 		<alterXML src="${server-configFile}">
 			<!-- Remove UserDatabase resource -->
 			<del xpath="//Resource[@name='UserDatabase']" />
