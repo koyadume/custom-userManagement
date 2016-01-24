@@ -1,4 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<Context path="/userMgmt-service" processTlds="false">
+<Context path="/userMgmt-service">
 	<ResourceLink name="jdbc/userMgmt" global="jdbc/userMgmt" type="javax.sql.DataSource" />
+	<JarScanner>
+    	<JarScanFilter defaultTldScan="false" defaultPluggabilityScan="false" />
+  	</JarScanner>
 </Context>
