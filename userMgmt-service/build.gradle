@@ -4,11 +4,13 @@ dependencies {
     compile project(':userMgmt-sdk'),
     		"in.koyad.piston.core:piston-dao:$pistonVersion",
     		"in.koyad.piston.core:piston-sdk:$pistonVersion",
-    		"org.glassfish.jersey.containers:jersey-container-servlet:$jerseyVersion"
+    		"org.glassfish.jersey.containers:jersey-container-servlet:$jerseyVersion",
+    		'com.unboundid:unboundid-ldapsdk:2.3.6'
 
     runtime 'org.hibernate:hibernate-entitymanager:4.3.8.Final'
 
-    provided "javax.servlet:javax.servlet-api:$servletVersion"
+    provided "javax.servlet:javax.servlet-api:$servletVersion",
+    		 "org.glassfish.jersey.containers:jersey-container-jdk-http:$jerseyVersion"
     		 
     testRuntime 'org.mariadb.jdbc:mariadb-java-client:1.2.0'
 }

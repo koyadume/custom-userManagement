@@ -19,9 +19,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
-import org.koyad.piston.core.model.Group;
-import org.koyad.piston.core.model.User;
-
+import in.koyad.piston.app.userMgmt.sdk.model.Group;
+import in.koyad.piston.app.userMgmt.sdk.model.User;
 import in.koyad.piston.app.usermgmt.forms.GroupDetailsPluginForm;
 import in.koyad.piston.common.utils.BeanPropertyUtils;
 import in.koyad.piston.common.utils.LogUtil;

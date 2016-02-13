@@ -15,10 +15,9 @@
  */
 package in.koyad.piston.app.usermgmt.actions;
 
-import org.koyad.piston.core.model.Group;
-
 import in.koyad.piston.app.userMgmt.sdk.api.UserManagementService;
 import in.koyad.piston.app.userMgmt.sdk.impl.UserManagementImpl;
+import in.koyad.piston.app.userMgmt.sdk.model.Group;
 import in.koyad.piston.app.usermgmt.forms.GroupDetailsPluginForm;
 import in.koyad.piston.app.usermgmt.utils.PopulateFormUtil;
 import in.koyad.piston.common.exceptions.FrameworkException;

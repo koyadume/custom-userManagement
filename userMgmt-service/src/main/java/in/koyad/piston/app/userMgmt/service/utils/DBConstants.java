@@ -1,4 +1,4 @@
-package in.koyad.piston.app.userMgmt.utils;
+package in.koyad.piston.app.userMgmt.service.utils;
 
 /**
 *
