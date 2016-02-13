@@ -21,14 +21,12 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import javax.ws.rs.client.Entity;
-import javax.ws.rs.core.MediaType;
-
-import org.koyad.piston.core.model.Group;
-import org.koyad.piston.core.model.User;
 
 import com.google.common.base.Joiner;
 
 import in.koyad.piston.app.userMgmt.sdk.api.UserManagementService;
+import in.koyad.piston.app.userMgmt.sdk.model.Group;
+import in.koyad.piston.app.userMgmt.sdk.model.User;
 import in.koyad.piston.common.bo.Attribute;
 import in.koyad.piston.common.exceptions.FrameworkException;
 import in.koyad.piston.common.utils.AbstractREST;

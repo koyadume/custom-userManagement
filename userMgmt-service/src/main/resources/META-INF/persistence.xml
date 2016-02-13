@@ -8,9 +8,9 @@
 	<persistence-unit name="userMgmt" transaction-type="RESOURCE_LOCAL">
 		<provider>org.hibernate.ejb.HibernatePersistence</provider>
 		<non-jta-data-source>java:comp/env/jdbc/userMgmt</non-jta-data-source>
-		<class>org.koyad.piston.core.model.User</class>
-		<class>org.koyad.piston.core.model.Group</class>
-		<class>org.koyad.piston.core.model.Role</class>
+		<class>in.koyad.piston.app.userMgmt.sdk.model.Role</class>
+		<class>in.koyad.piston.app.userMgmt.sdk.model.User</class>
+		<class>in.koyad.piston.app.userMgmt.sdk.model.Group</class>
 		<properties>
 			<property name="hibernate.dialect" value="org.hibernate.dialect.MySQL5InnoDBDialect" />
 			<property name="hibernate.cache.use_second_level_cache" value="false" />

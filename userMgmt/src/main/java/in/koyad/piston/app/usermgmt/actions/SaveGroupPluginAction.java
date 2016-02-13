@@ -19,11 +19,10 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 
-import org.koyad.piston.core.model.Group;
-import org.koyad.piston.core.model.User;
-
 import in.koyad.piston.app.userMgmt.sdk.api.UserManagementService;
 import in.koyad.piston.app.userMgmt.sdk.impl.UserManagementImpl;
+import in.koyad.piston.app.userMgmt.sdk.model.Group;
+import in.koyad.piston.app.userMgmt.sdk.model.User;
 import in.koyad.piston.app.usermgmt.forms.GroupDetailsPluginForm;
 import in.koyad.piston.common.bo.Attribute;
 import in.koyad.piston.common.constants.MsgType;

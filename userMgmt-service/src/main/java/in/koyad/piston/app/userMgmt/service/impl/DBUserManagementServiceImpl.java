@@ -20,11 +20,10 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
-import org.koyad.piston.core.model.Group;
-import org.koyad.piston.core.model.User;
-
 import in.koyad.piston.app.userMgmt.sdk.api.UserManagementService;
-import in.koyad.piston.app.userMgmt.utils.DBConstants;
+import in.koyad.piston.app.userMgmt.sdk.model.Group;
+import in.koyad.piston.app.userMgmt.sdk.model.User;
+import in.koyad.piston.app.userMgmt.service.utils.DBConstants;
 import in.koyad.piston.common.bo.Attribute;
 import in.koyad.piston.common.exceptions.FrameworkException;
 import in.koyad.piston.common.utils.LogUtil;
