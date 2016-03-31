@@ -14,12 +14,12 @@ CREATE TABLE USER (
   CONSTRAINT UNIQUE_EMAIL UNIQUE KEY (EMAIL)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-SET @portalAdminUserId := '3ca1a75a-d98b-42c7-8dd4-8176b25d317e';
+-- SET @portalAdminUserId := '3ca1a75a-d98b-42c7-8dd4-8176b25d317e';
 INSERT INTO USER (ID, UID, PASSWORD, FIRST_NAME, LAST_NAME, EMAIL) 
 VALUES
-	(@portalAdminUserId, 'portalAdmin', 'portalAdmin', 'Portal', 'Admin', 'pistonAdmin@koyad.in'),
-	('4d56ae14-388f-4d5e-a10e-967569f6f591', 'piston', 'piston', 'Piston', NULL, 'piston@koyad.in'),
-	('c62cd6c9-3fec-4e59-8a2e-89d200a267b8', 'tomcat', 'tomcat', 'Tomcat', NULL, 'tomcat@koyad.in');
+	('portalAdmin', 'portalAdmin', 'portalAdmin', 'Portal', 'Admin', 'pistonAdmin@koyad.in'),
+	('piston', 'piston', 'piston', 'Piston', NULL, 'piston@koyad.in'),
+	('tomcat', 'tomcat', 'tomcat', 'Tomcat', NULL, 'tomcat@koyad.in');
 	
 /* groups */	
 CREATE TABLE GROUPS (
@@ -28,9 +28,9 @@ CREATE TABLE GROUPS (
   PRIMARY KEY (ID)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-SET @portalAdminsGroupId := '1bc0dd7c-4a2b-429c-914e-51db75a73001';
+-- SET @portalAdminsGroupId := '1bc0dd7c-4a2b-429c-914e-51db75a73001';
 INSERT INTO GROUPS (ID, NAME) 
-VALUES (@portalAdminsGroupId, 'Portal Admins');
+VALUES ('portalAdmins', 'Portal Admins');
 
 /* users and groups mappings */	
 CREATE TABLE USER_GROUP (
@@ -43,7 +43,7 @@ CREATE TABLE USER_GROUP (
 
 INSERT INTO USER_GROUP (USER_ID, GROUP_ID) 
 VALUES
-	(@portalAdminUserId, @portalAdminsGroupId);
+	('portalAdmin', 'portalAdmins');
 
 /* roles */
 CREATE TABLE ROLE (
