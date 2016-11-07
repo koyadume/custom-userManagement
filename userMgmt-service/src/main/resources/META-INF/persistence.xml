@@ -6,7 +6,7 @@
 			version="2.1">
 
 	<persistence-unit name="userMgmt" transaction-type="RESOURCE_LOCAL">
-		<provider>org.hibernate.ejb.HibernatePersistence</provider>
+		<provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
 		<non-jta-data-source>java:comp/env/jdbc/userMgmt</non-jta-data-source>
 		<class>in.koyad.piston.app.userMgmt.sdk.model.Role</class>
 		<class>in.koyad.piston.app.userMgmt.sdk.model.User</class>

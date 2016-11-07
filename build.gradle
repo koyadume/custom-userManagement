@@ -12,6 +12,8 @@ subprojects {
         servletVersion = '3.1.0'
         jerseyVersion = '2.21'
         pistonVersion = '2.3'
+        hibernateVersion = '5.2.2.Final'
+        mariadbDriverVersion = '1.5.2'
     }
 
     repositories {

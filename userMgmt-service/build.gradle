@@ -7,10 +7,10 @@ dependencies {
     		"org.glassfish.jersey.containers:jersey-container-servlet:$jerseyVersion",
     		'com.unboundid:unboundid-ldapsdk:2.3.6'
 
-    runtime 'org.hibernate:hibernate-entitymanager:4.3.8.Final'
+    runtime "org.hibernate:hibernate-entitymanager:$hibernateVersion"
 
     provided "javax.servlet:javax.servlet-api:$servletVersion",
     		 "org.glassfish.jersey.containers:jersey-container-jdk-http:$jerseyVersion"
     		 
-    testRuntime 'org.mariadb.jdbc:mariadb-java-client:1.2.0'
+    testRuntime "org.mariadb.jdbc:mariadb-java-client:$mariadbDriverVersion"
 }
