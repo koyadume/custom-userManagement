@@ -6,12 +6,13 @@ subprojects {
     sourceCompatibility = 1.8
 
     group = 'in.koyad.piston.apps'
-    version = computeVersion()
     
     ext {
         servletVersion = '3.1.0'
+        jpaVersion = '2.1.0'
         jerseyVersion = '2.21'
-        pistonVersion = '2.3'
+        pistonShareVersion = '1.x.y'
+        pistonCoreVersion = '3.x.y'
         hibernateVersion = '5.2.2.Final'
         mariadbDriverVersion = '1.5.2'
     }
@@ -48,13 +49,5 @@ subprojects {
     dependencies {
         provided 'org.projectlombok:lombok:1.16.6'
     }
-}
-
-def computeVersion() {
-	File version = file('version') 
-	if(version.exists()) {
-		return version.text
-	}
-    return "invalidVersion"
 }
 

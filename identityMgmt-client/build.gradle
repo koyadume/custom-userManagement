@@ -1,0 +1,7 @@
+dependencies {
+	
+	compile project(':identityMgmt-sdk')
+	
+	provided "in.mechcloud.piston.share:piston-dao:$pistonShareVersion"
+			 
+}

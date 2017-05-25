@@ -1,5 +1,0 @@
-dependencies {
-	
-	provided "in.koyad.piston.core:piston-common:$pistonVersion" 
-			 
-}

@@ -1,0 +1,29 @@
+apply plugin: 'war'
+
+dependencies {  
+    compile project(':identityMgmt-sdk'),
+    		"org.glassfish.jersey.containers:jersey-container-servlet:$jerseyVersion",
+    		'com.unboundid:unboundid-ldapsdk:2.3.6',
+    		"in.mechcloud.piston.share:piston-dao:$pistonShareVersion"
+
+    runtime "org.hibernate:hibernate-entitymanager:$hibernateVersion"
+
+    provided "javax.servlet:javax.servlet-api:$servletVersion",
+    		 "org.glassfish.jersey.containers:jersey-container-jdk-http:$jerseyVersion"
+    		 
+    testRuntime "org.mariadb.jdbc:mariadb-java-client:$mariadbDriverVersion"
+}
+
+war {
+	archiveName project.name + '.war'
+}
+
+task deploy << {
+    copy {
+        from 'build/' + libsDirName
+        into System.getenv('CATALINA_BASE_REST') + '/webapps'
+        include "*.war"
+    }
+}
+
+war.finalizedBy(deploy)

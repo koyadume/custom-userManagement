@@ -1,0 +1,6 @@
+dependencies {
+	
+	provided "org.eclipse.persistence:javax.persistence:$jpaVersion",
+			 "in.mechcloud.piston.share:piston-dao:$pistonShareVersion"
+			 
+}

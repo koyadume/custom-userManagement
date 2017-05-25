@@ -1,3 +1,5 @@
-include 'userMgmt-sdk', 
-		'userMgmt-service',
-		'userMgmt'
+include 'identityMgmt-sdk',
+		'identityMgmt-client', 
+		'identityMgmt',
+		'identityMgmt-service',
+		'identityStore-service'
