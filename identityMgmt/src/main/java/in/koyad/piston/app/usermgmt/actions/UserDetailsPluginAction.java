@@ -53,7 +53,7 @@ public class UserDetailsPluginAction extends BasePluginAction {
 		}
 			
 		LOGGER.exitMethod("execute");
-		return "/pages/userDetails.xml";
+		return "/userDetails.xml";
 	}
 
 }

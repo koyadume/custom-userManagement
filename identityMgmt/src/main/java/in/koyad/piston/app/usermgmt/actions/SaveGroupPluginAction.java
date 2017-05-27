@@ -89,7 +89,7 @@ public class SaveGroupPluginAction extends BasePluginAction {
 		req.setAttribute(GroupDetailsPluginForm.FORM_NAME, form);
 			
 		LOGGER.exitMethod("execute");
-		return "/pages/groupDetails.xml";
+		return "/groupDetails.xml";
 	}
 
 }

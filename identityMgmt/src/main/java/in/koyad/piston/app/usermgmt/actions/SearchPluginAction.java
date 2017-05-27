@@ -35,7 +35,7 @@ public class SearchPluginAction extends BasePluginAction {
 		LOGGER.enterMethod("execute");
 		
 		LOGGER.exitMethod("execute");
-		return "/pages/search.xml";
+		return "/search.xml";
 	}
 
 }

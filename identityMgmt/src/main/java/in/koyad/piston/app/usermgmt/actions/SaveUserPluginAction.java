@@ -71,7 +71,7 @@ public class SaveUserPluginAction extends BasePluginAction {
 		req.setAttribute(UserDetailsPluginForm.FORM_NAME, form);
 			
 		LOGGER.exitMethod("execute");
-		return "/pages/userDetails.xml";
+		return "/userDetails.xml";
 	}
 
 }

@@ -54,7 +54,7 @@ public class GroupDetailsPluginAction extends BasePluginAction {
 		}
 			
 		LOGGER.exitMethod("execute");
-		return "/pages/groupDetails.xml";
+		return "/groupDetails.xml";
 	}
 
 }
