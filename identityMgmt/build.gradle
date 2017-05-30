@@ -1,7 +1,5 @@
 apply plugin: 'war'
 
-version = computeVersion()
-
 dependencies {
 
 	compile project(':identityMgmt-client')
@@ -9,13 +7,5 @@ dependencies {
 	provided "in.mechcloud.piston.core:piston-app-api:1.x.y",
 			 "in.mechcloud.piston.share:piston-dao:$pistonShareVersion"
 	
-}
-
-def computeVersion() {
-	File version = file('version') 
-	if(version.exists()) {
-		return version.text
-	}
-    return "invalidVersion"
 }
 
