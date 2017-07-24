@@ -17,6 +17,7 @@ package in.koyad.piston.app.usermgmt.actions;
 
 import in.koyad.piston.app.api.annotation.AnnoPluginAction;
 import in.koyad.piston.app.api.model.Request;
+import in.koyad.piston.app.api.model.Response;
 import in.koyad.piston.app.api.plugin.BasePluginAction;
 import in.koyad.piston.common.basic.exception.FrameworkException;
 import in.koyad.piston.common.util.LogUtil;
@@ -31,7 +32,7 @@ public class SearchPluginAction extends BasePluginAction {
 	private static final LogUtil LOGGER = LogUtil.getLogger(SearchPluginAction.class);
 	
 	@Override
-	public String execute(Request req) throws FrameworkException {
+	public String execute(Request req, Response resp) throws FrameworkException {
 		LOGGER.enterMethod("execute");
 		
 		LOGGER.exitMethod("execute");

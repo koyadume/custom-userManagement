@@ -5,7 +5,7 @@ subprojects {
 
     sourceCompatibility = 1.8
 
-    group = 'in.koyad.piston.apps.admin'
+    group = 'in.mechcloud.piston.apps.custom'
     version = computeVersion()
     
     ext {

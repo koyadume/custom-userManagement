@@ -18,6 +18,7 @@ package in.koyad.piston.app.usermgmt.actions;
 
 import in.koyad.piston.app.api.annotation.AnnoPluginAction;
 import in.koyad.piston.app.api.model.Request;
+import in.koyad.piston.app.api.model.Response;
 import in.koyad.piston.app.api.plugin.BasePluginAction;
 import in.koyad.piston.app.identityMgmt.client.impl.IdentityMgmtClientImpl;
 import in.koyad.piston.app.identityMgmt.sdk.model.User;
@@ -42,7 +43,7 @@ public class SaveUserPluginAction extends BasePluginAction {
 	private static final LogUtil LOGGER = LogUtil.getLogger(SaveUserPluginAction.class);
 	
 	@Override
-	public String execute(Request req) throws FrameworkException {
+	public String execute(Request req, Response resp) throws FrameworkException {
 		LOGGER.enterMethod("execute");
 		
 		UserDetailsPluginForm form = req.getPluginForm(UserDetailsPluginForm.class);
